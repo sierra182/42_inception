@@ -1,16 +1,29 @@
 version: '3.8'
 
 services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - internal
+    volumes:
+      - ./nginx/html:/var/www/html
+
   mariadb:
     container_name: maria
     build:
-      context: ./
+      context: ./mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - maria_data:/var/lib/mysql
     networks:
       - internal
+
 volumes:
   maria_data:
     driver: local
