@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  nginx:
-    container_name: nginx
-    build:
-      context: ./nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - internal
-    volumes:
-      - ./nginx/html:/var/www/html
 
   mariadb:
     container_name: maria
@@ -19,13 +8,48 @@ services:
       context: ./mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}         # MariaDB crée cette base de données
+      - MYSQL_USER=${MYSQL_USER}                 # MariaDB crée cet utilisateur
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}  
     volumes:
       - maria_data:/var/lib/mysql
     networks:
       - internal
 
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./wordpress
+    environment:
+      WORDPRESS_DB_HOST: maria                  # L'hôte MariaDB est nommé "maria" dans Docker
+      WORDPRESS_DB_USER: ${MYSQL_USER}          # Utilisateur pour se connecter à MariaDB
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}  # Mot de passe pour se connecter à MariaDB
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}      # Base de données à utiliser
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - internal
+    depends_on:
+      - mariadb
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - wordpress_data:/var/www/html 
+    networks:
+      - internal
+    depends_on:
+      - wordpress
+
 volumes:
   maria_data:
+    driver: local
+  wordpress_data:
     driver: local
 
 networks:
