@@ -25,6 +25,21 @@ services:
       WORDPRESS_DB_USER: ${MYSQL_USER}          # Utilisateur pour se connecter à MariaDB
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}  # Mot de passe pour se connecter à MariaDB
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}      # Base de données à utiliser
+    entrypoint: >
+      sh -c '    
+      until mysql -h"maria" -u"mon_utilisateur" -p"mon_mot_de_passe" "wordpress_db" -e "SELECT 1" >/dev/null 2>&1; do
+        echo "Waiting for MariaDB...";
+        sleep 5;
+      done;
+      wp core install --path=/var/www/html \
+        --url="http://localhost" \
+        --title="Mon Super Site" \
+        --admin_user="admin" \
+        --admin_password="mot_de_passe_admin" \
+        --admin_email="admin@exemple.com" \
+        --skip-email \
+        --locale="fr_FR" --allow-root || true;
+        php-fpm7.4 -F'      
     volumes:
       - wordpress_data:/var/www/html
     networks:
