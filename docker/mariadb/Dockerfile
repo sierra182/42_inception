@@ -8,4 +8,12 @@ RUN  apt-get update \
 RUN mkdir -p /run/mysqld \
     && chown -R mysql:mysql /run/mysqld
 
-CMD ["mysqld"]
+RUN sed -i 's/bind-address\s*=.*/bind-address = 0.0.0.0/' \
+	/etc/mysql/mariadb.conf.d/50-server.cnf
+	
+# Copier et rendre exécutable le script d'initialisation
+COPY init_db.sh /usr/local/bin/init_db.sh
+RUN chmod +x /usr/local/bin/init_db.sh
+
+CMD ["/usr/local/bin/init_db.sh", "&&", "mysqld_safe"]	
+# CMD ["mysqld"]
