@@ -17,7 +17,7 @@ RUN mkdir -p /etc/nginx/ssl && \
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Exposer le port 443 pour HTTPS
-EXPOSE 80 443
+EXPOSE 443
 
 # Commande pour démarrer NGINX
 CMD ["nginx", "-g", "daemon off;"]
