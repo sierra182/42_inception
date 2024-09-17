@@ -6,11 +6,12 @@ services:
     container_name: maria
     build:
       context: ./mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}         # MariaDB crée cette base de données
-      - MYSQL_USER=${MYSQL_USER}                 # MariaDB crée cet utilisateur
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}  
+    env_file: .env
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #   - MYSQL_DATABASE=${MYSQL_DATABASE}         # MariaDB crée cette base de données
+    #   - MYSQL_USER=${MYSQL_USER}                 # MariaDB crée cet utilisateur
+    #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}  
     volumes:
       - maria_data:/var/lib/mysql
     networks:
@@ -20,6 +21,7 @@ services:
     container_name: wordpress
     build:
       context: ./wordpress
+    # env_file: .env
     environment:
       WORDPRESS_DB_HOST: maria                  # L'hôte MariaDB est nommé "maria" dans Docker
       WORDPRESS_DB_USER: ${MYSQL_USER}          # Utilisateur pour se connecter à MariaDB

@@ -25,8 +25,10 @@ define( 'DB_NAME', 'wordpress_db' );
 
 /** Database username */
 // define( 'DB_USER', '${WORDPRESS_DB_USER}' );
-define( 'DB_USER', 'mon_utilisateur' );
-
+// define( 'DB_USER', getenv('WORDPRESS_DB_USER') );
+// echo "DB_USER: " . getenv('WORDPRESS_DB_USER') . "<br>";
+define( 'DB_USER', $_SERVER['WORDPRESS_DB_USER'] );
+echo "DB_USER: " . $_SERVER['WORDPRESS_DB_USER'] . "<br>";
 /** Database password */
 // define( 'DB_PASSWORD', '${WORDPRESS_DB_PASSWORD}' );
 define( 'DB_PASSWORD', 'mon_mot_de_passe' );
