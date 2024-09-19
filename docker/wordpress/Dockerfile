@@ -39,6 +39,11 @@ RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = wordpress:9000|" \
 /etc/php/7.4/fpm/pool.d/www.conf
 
+# RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = wordpress:9000|" \
+#     /etc/php/7.4/fpm/pool.d/www.conf \
+#     && sed -i '$ a\env[WORDPRESS_DB_PASSWORD] = $WORDPRESS_DB_PASSWORD' /etc/php/7.4/fpm/pool.d/www.conf
+
+
 COPY wp-config.php /var/www/html/wp-config.php
 # Copier le fichier wp-config.php dans le container
 

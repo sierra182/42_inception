@@ -31,7 +31,7 @@ define( 'DB_USER', 'mon_utilisateur' );
 // echo "DB_USER: " . $_SERVER['WORDPRESS_DB_USER'] . "<br>";
 /** Database password */
 // define( 'DB_PASSWORD', '${WORDPRESS_DB_PASSWORD}' );
-// define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD_FILE') );
+// define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
 
 define( 'DB_PASSWORD', trim(file_get_contents('/run/secrets/db_password')) );
 

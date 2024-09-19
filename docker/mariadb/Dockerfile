@@ -15,5 +15,5 @@ RUN sed -i 's/bind-address\s*=.*/bind-address = 0.0.0.0/' \
 COPY init_db.sh /usr/local/bin/init_db.sh
 RUN chmod +x /usr/local/bin/init_db.sh
 
-CMD ["/usr/local/bin/init_db.sh", "&&", "mysqld_safe"]	
+CMD ["/usr/local/bin/init_db.sh", "&&", "mysqld_safe"]
 # CMD ["mysqld"]
