@@ -13,7 +13,7 @@ services:
     #   - MYSQL_USER=${MYSQL_USER}                 # MariaDB crée cet utilisateur
     #   - MYSQL_PASSWORD=${MYSQL_PASSWORD}  
     volumes:
-      - maria_data:/var/lib/mysql
+      - /home/seblin/42/42_inception/data/mariadb:/var/lib/mysql
     networks:
       - internal
     restart: on-failure
@@ -97,10 +97,16 @@ services:
     restart: on-failure
 
 volumes:
-  maria_data:
-    driver: local
   wordpress_data:
     driver: local
+  # maria_data:
+  #   driver: local
+  #   driver_opts:
+  #     type: 'none'
+  #     o: 'bind'
+  #     device: '/home/seblin/42/42_inception/data/mariadb'
+  # maria_data:
+  #   driver: local
 
 networks:
   internal:
