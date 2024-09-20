@@ -4,6 +4,7 @@ services:
 
   mariadb:
     container_name: maria
+    image: maria
     build:
       context: ./mariadb
     # env_file: .env_db
@@ -31,6 +32,7 @@ services:
 
   wordpress:
     container_name: wordpress
+    image: wordpress
     build:
       context: ./wordpress
     # env_file: .env_wp
@@ -120,6 +122,7 @@ services:
 
   nginx:
     container_name: nginx
+    image: nginx
     build:
       context: ./nginx
     ports:    
