@@ -1,6 +1,6 @@
 #!bin/bash
 
-until mysql -h"maria" -u"${WORDPRESS_DB_USER}" -p"$(cat ${WORDPRESS_DB_PASSWORD_FILE})" "${WORDPRESS_DB_NAME}" -e "SELECT 1" >/dev/null 2>&1; do
+until mysql -h"maria" -u"$(cat ${WORDPRESS_DB_USER_FILE})" -p"$(cat ${WORDPRESS_DB_PASSWORD_FILE})" "${WORDPRESS_DB_NAME}" -e "SELECT 1" >/dev/null 2>&1; do
 echo "Waiting for MariaDB...";
 sleep 5;
 done;
