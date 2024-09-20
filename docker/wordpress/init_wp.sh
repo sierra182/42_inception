@@ -9,8 +9,8 @@ if ! wp core is-installed --path=/var/www/html --allow-root; then
 wp core install --path=/var/www/html \
 	--url="https://svidot.42.fr" \
 	--title="Mon Super Site" \
-	--admin_user="admin" \
-	--admin_password="mot_de_passe_admin" \
+	--admin_user="$(cat ${WORDPRESS_ADM_USER_FILE})" \
+	--admin_password="$(cat ${WORDPRESS_ADM_PASSWORD_FILE})" \
 	--admin_email="admin@exemple.com" \
 	--skip-email \
 	--locale="fr_FR" --allow-root;
@@ -18,10 +18,10 @@ else
 echo "WordPress is already installed.";
 fi
 
-if ! wp user get dupont --path=/var/www/html --allow-root >/dev/null 2>&1; then
-wp user create dupont dupont@example.com --role=editor --user_pass=super_pass --path=/var/www/html --allow-root;
+if ! wp user get $(cat ${WORDPRESS_USER_FILE}) --path=/var/www/html --allow-root >/dev/null 2>&1; then
+wp user create $(cat ${WORDPRESS_USER_FILE}) dupont@example.com --role=editor --user_pass=$(cat ${WORDPRESS_PASSWORD_FILE}) --path=/var/www/html --allow-root;
 else
-echo "User dupont already exists.";
+echo "User $(cat ${WORDPRESS_USER_FILE}) already exists.";
 fi
 
 php-fpm7.4 -F
