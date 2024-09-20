@@ -52,4 +52,7 @@ RUN chmod -R 755 /var/www/html
 
 EXPOSE 9000
 
-CMD ["php-fpm7.4", "-F"]
+COPY init_wp.sh /usr/local/bin/init_wp.sh
+RUN chmod +x /usr/local/bin/init_wp.sh
+ENTRYPOINT [ "init_wp.sh" ]
+# CMD ["php-fpm7.4", "-F"]

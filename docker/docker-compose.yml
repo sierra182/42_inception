@@ -52,33 +52,33 @@ services:
     #   fi;          
     #   wp user create dupont dupont@example.com --role=editor --user_pass=super_pass --allow-root;      
     #   php-fpm7.4 -F'   
-    entrypoint: >
-      sh -c '      
-      until mysql -h"maria" -u"${MYSQL_USER}" -p"$(cat /run/secrets/db_password)" "${MYSQL_DATABASE}" -e "SELECT 1" >/dev/null 2>&1; do
-        echo "Waiting for MariaDB...";
-        sleep 5;
-      done;
+    # entrypoint: >
+    #   sh -c '      
+    #   until mysql -h"maria" -u"${MYSQL_USER}" -p"$(cat /run/secrets/db_password)" "${MYSQL_DATABASE}" -e "SELECT 1" >/dev/null 2>&1; do
+    #     echo "Waiting for MariaDB...";
+    #     sleep 5;
+    #   done;
       
-      if ! wp core is-installed --path=/var/www/html --allow-root; then
-        wp core install --path=/var/www/html \
-          --url="https://svidot.42.fr" \
-          --title="Mon Super Site" \
-          --admin_user="admin" \
-          --admin_password="mot_de_passe_admin" \
-          --admin_email="admin@exemple.com" \
-          --skip-email \
-          --locale="fr_FR" --allow-root;
-      else
-        echo "WordPress is already installed.";
-      fi
+    #   if ! wp core is-installed --path=/var/www/html --allow-root; then
+    #     wp core install --path=/var/www/html \
+    #       --url="https://svidot.42.fr" \
+    #       --title="Mon Super Site" \
+    #       --admin_user="admin" \
+    #       --admin_password="mot_de_passe_admin" \
+    #       --admin_email="admin@exemple.com" \
+    #       --skip-email \
+    #       --locale="fr_FR" --allow-root;
+    #   else
+    #     echo "WordPress is already installed.";
+    #   fi
       
-      if ! wp user get dupont --path=/var/www/html --allow-root >/dev/null 2>&1; then
-        wp user create dupont dupont@example.com --role=editor --user_pass=super_pass --path=/var/www/html --allow-root;
-      else
-        echo "User dupont already exists.";
-      fi
+    #   if ! wp user get dupont --path=/var/www/html --allow-root >/dev/null 2>&1; then
+    #     wp user create dupont dupont@example.com --role=editor --user_pass=super_pass --path=/var/www/html --allow-root;
+    #   else
+    #     echo "User dupont already exists.";
+    #   fi
 
-      php-fpm7.4 -F'   
+    #   php-fpm7.4 -F'   
     volumes:
       - wordpress_data:/var/www/html
     networks:
