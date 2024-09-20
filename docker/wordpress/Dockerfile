@@ -36,13 +36,15 @@ RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 # 	--allow-root
 
 # Modifie le fichier www.conf pour écouter sur le port 9000 et pas sur le socket
-RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = wordpress:9000|" \
-/etc/php/7.4/fpm/pool.d/www.conf
-
 # RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = wordpress:9000|" \
-#     /etc/php/7.4/fpm/pool.d/www.conf \
-#     && sed -i '$ a\env[WORDPRESS_DB_PASSWORD] = $WORDPRESS_DB_PASSWORD' /etc/php/7.4/fpm/pool.d/www.conf
+# 	/etc/php/7.4/fpm/pool.d/www.conf
 
+RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = wordpress:9000|" \
+    /etc/php/7.4/fpm/pool.d/www.conf \
+    && sed -i '$ a\env[WORDPRESS_DB_HOST] = $WORDPRESS_DB_HOST' /etc/php/7.4/fpm/pool.d/www.conf \
+	&& sed -i '$ a\env[WORDPRESS_DB_NAME] = $WORDPRESS_DB_NAME' /etc/php/7.4/fpm/pool.d/www.conf \
+	&& sed -i '$ a\env[WORDPRESS_DB_USER_FILE] = $WORDPRESS_DB_USER_FILE' /etc/php/7.4/fpm/pool.d/www.conf \
+	&& sed -i '$ a\env[WORDPRESS_DB_PASSWORD_FILE] = $WORDPRESS_DB_PASSWORD_FILE' /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY wp-config.php /var/www/html/wp-config.php
 # Copier le fichier wp-config.php dans le container

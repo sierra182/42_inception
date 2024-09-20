@@ -29,7 +29,7 @@ services:
       context: ./wordpress
     # env_file: .env
     environment:
-      WORDPRESS_DB_HOST: maria                  # L'hôte MariaDB est nommé "maria" dans Docker
+      WORDPRESS_DB_HOST: mariadb                  # L'hôte MariaDB est nommé "maria" dans Docker
       WORDPRESS_DB_USER_FILE: /run/secrets/db_user          # Utilisateur pour se connecter à MariaDB
       # WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}  # Mot de passe pour se connecter à MariaDB
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}      # Base de données à utiliser

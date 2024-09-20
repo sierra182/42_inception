@@ -21,10 +21,10 @@
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 // define( 'DB_NAME', '${WORDPRESS_DB_NAME}' );
-define( 'DB_NAME', 'wordpress_db' );
-
+// define( 'DB_NAME', 'wordpress_db' );
+define( 'DB_NAME', getenv('WORDPRESS_DB_NAME'));
 /** Database username */
-define( 'DB_USER', 'mon_utilisateur' );
+// define( 'DB_USER', 'mon_utilisateur' );
 // define( 'DB_USER', getenv('WORDPRESS_DB_USER') );
 // echo "DB_USER: " . getenv('WORDPRESS_DB_USER') . "<br>";
 // define( 'DB_USER', $_SERVER['WORDPRESS_DB_USER'] );
@@ -33,13 +33,16 @@ define( 'DB_USER', 'mon_utilisateur' );
 // define( 'DB_PASSWORD', '${WORDPRESS_DB_PASSWORD}' );
 // define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
 
-define( 'DB_PASSWORD', trim(file_get_contents('/run/secrets/db_password')) );
+// define( 'DB_USER', trim(file_get_contents('/run/secrets/db_user')) );
+define( 'DB_USER', trim(file_get_contents(getenv('WORDPRESS_DB_USER_FILE'))) );
 
+define( 'DB_PASSWORD', trim(file_get_contents(getenv('WORDPRESS_DB_PASSWORD_FILE'))) );
+// define( 'DB_PASSWORD', trim(file_get_contents('/run/secrets/db_password')) );
 // define( 'DB_PASSWORD', 'mon_mot_de_passe' );
 
 /** Database hostname */
 // define( 'DB_HOST', '${WORDPRESS_DB_HOST}' );
-define( 'DB_HOST', 'maria' );
+define( 'DB_HOST', getenv('WORDPRESS_DB_HOST'));// 'mariadb' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
