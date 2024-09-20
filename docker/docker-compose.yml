@@ -6,12 +6,18 @@ services:
     container_name: maria
     build:
       context: ./mariadb
-    env_file: .env
+    # env_file: .env_db
     environment:
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
-      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
-      - MYSQL_USER_FILE=/run/secrets/db_user     
-    #   - MYSQL_DATABASE=${MYSQL_DATABASE}         # MariaDB crée cette base de données
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD_FILE: ${MYSQL_ROOT_PASSWORD_FILE}
+      MYSQL_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
+      MYSQL_USER_FILE: ${MYSQL_USER_FILE} 
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+    #   - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+    #   - MYSQL_USER_FILE=/run/secrets/db_user     
+    #   - MYSQL_DATABASE=wordpress_db
+       #${MYSQL_DATABASE}         # MariaDB crée cette base de données
     #   - MYSQL_USER=${MYSQL_USER}                 # MariaDB crée cet utilisateur
     volumes:
       - maria_data:/var/lib/mysql
@@ -27,18 +33,30 @@ services:
     container_name: wordpress
     build:
       context: ./wordpress
-    # env_file: .env
+    # env_file: .env_wp
     environment:
-      WORDPRESS_DB_HOST: mariadb                  # L'hôte MariaDB est nommé "maria" dans Docker
-      WORDPRESS_DB_USER_FILE: /run/secrets/db_user          # Utilisateur pour se connecter à MariaDB
-      # WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}  # Mot de passe pour se connecter à MariaDB
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}      # Base de données à utiliser
-      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}                 
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+
+      WORDPRESS_DB_USER_FILE: ${MYSQL_USER_FILE}
+      WORDPRESS_DB_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
+
+      WORDPRESS_ADM_USER_FILE: ${WORDPRESS_ADM_USER_FILE}
+      WORDPRESS_ADM_PASSWORD_FILE: ${WORDPRESS_ADM_PASSWORD_FILE}
+
+      WORDPRESS_USER_FILE: ${WORDPRESS_USER_FILE}
+      WORDPRESS_PASSWORD_FILE: ${WORDPRESS_PASSWORD_FILE}
+    # environment:
+    #   WORDPRESS_DB_HOST: mariadb                 
+    #   WORDPRESS_DB_USER_FILE: /run/secrets/db_user         
+    
+    #   WORDPRESS_DB_NAME: wordpress_db
+    #   WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
       
-      WORDPRESS_ADM_PASSWORD_FILE: /run/secrets/wp_adm_password
-      WORDPRESS_ADM_USER_FILE: /run/secrets/wp_adm_user
-      WORDPRESS_PASSWORD_FILE: /run/secrets/wp_password
-      WORDPRESS_USER_FILE: /run/secrets/wp_user
+    #   WORDPRESS_ADM_PASSWORD_FILE: /run/secrets/wp_adm_password
+    #   WORDPRESS_ADM_USER_FILE: /run/secrets/wp_adm_user
+    #   WORDPRESS_PASSWORD_FILE: /run/secrets/wp_password
+    #   WORDPRESS_USER_FILE: /run/secrets/wp_user
 
     secrets:
       - db_user
