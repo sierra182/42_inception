@@ -18,12 +18,15 @@ Objectifs d’apprentissage
 📌 L’avantage de Docker est clair, il résout l’un des plus gros problèmes des développeurs:
 
 👉
-Se retrouver à créer un super programme sur son ordinateur, et se rendre compte qu’il ne fonctionne que sur son propre ordinateur. Pour l’utiliser ailleurs il va falloir installer les dépendances requises 🤯
+Se retrouver à créer un super programme sur son ordinateur, et se rendre compte qu’il ne fonctionne que sur son propre ordinateur. Pour l’utiliser ailleurs il va
+ falloir installer les dépendances requises 🤯
 
-Souvenez vous ce super programme que vous aviez trouvé sur Github, vous l’installez comme prévu par le tutoriel du ReadMe 📄, mais l’installation crash indiquant “You have missing dependencies”, ou encore “This version of this file is not compatible with your OS” 😣
+Souvenez vous ce super programme que vous aviez trouvé sur Github, vous l’installez comme prévu par le tutoriel du ReadMe 📄, mais l’installation crash indiquant
+ “You have missing dependencies”, ou encore “This version of this file is not compatible with your OS” 😣
 
 👉
-Alors oui, vous pouvez rester un bon développeur et proposer un super script qui installera ces dépendances, mais vous ne pouvez pas prévoir que l’utilisateur soit sur Mac, Linux ou encore qu’il ait une version d’OS si vieille que celle ci ne connait même pas vos dépendances !
+Alors oui, vous pouvez rester un bon développeur et proposer un super script qui installera ces dépendances, mais vous ne pouvez pas prévoir que l’utilisateur
+ soit sur Mac, Linux ou encore qu’il ait une version d’OS si vieille que celle ci ne connait même pas vos dépendances !
 ⚙️ Les types de problèmes que corrige Docker
 
 Passer 4 heures sur du débug d’un logiciel qui n’est pas le notre et se rendre compte que nous n’y arriverons pas, a tendance à rendre fou 🤯
@@ -123,11 +126,13 @@ Avec Compose, nous pouvons créer un fichier YAML pour définir les services et,
 Compose permettrait donc de gérer des applications qui utilisent plusieurs containers et de communiquer entre eux.
 
 📖
-Vous devez également rendre un Makefile qui doit se trouver à la racine de votre répertoire. Il doit permettre de mettre en place toute votre application (c’est-à-dire build les images Docker via docker-compose.yml)
+Vous devez également rendre un Makefile qui doit se trouver à la racine de votre répertoire. Il doit permettre de mettre en place toute votre application
+ (c’est-à-dire build les images Docker via docker-compose.yml)
 📖
 Un texte sur fond bleu comme celui ci est toujours tiré du sujet d’Inception de 42.
 
-Ici le sujet demande de build les différentes images via un fichier .yml, cela tombe bien ce genre de fichier est appelé YAML, c’est le fameux format indiqué plus haut par la Doc de Docker pour utiliser Docker-Compose.
+Ici le sujet demande de build les différentes images via un fichier .yml, cela tombe bien ce genre de fichier est appelé YAML, c’est le fameux format indiqué
+ plus haut par la Doc de Docker pour utiliser Docker-Compose.
 
 
 📖
@@ -149,7 +154,8 @@ Vous auriez besoin de mettre en place un site internet, vous créez votre image 
 Vous avez désormais un site internet fonctionnel pour votre entreprise.
 
 Évidemment cela risque de prendre plus de temps que 2 phrases à mettre en place 🤣
-Maintenant que Bananeo compte une dizaine d’employés, il serait sympa de mettre en place une badgeuse 🪪 à l’entrée pour éviter trop de travail à Manu 👮🏻‍♂️ de la sécurité.
+Maintenant que Bananeo compte une dizaine d’employés, il serait sympa de mettre en place une badgeuse 🪪 à l’entrée pour éviter trop de travail à Manu 👮🏻‍♂️ de la 
+sécurité.
 
 
 Vous créez donc une nouvelle image Docker, spécialement conçue pour enregistrer vos salariés dans une base de données et étant reliée directement à votre badgeuse.
@@ -157,13 +163,15 @@ Vous créez donc une nouvelle image Docker, spécialement conçue pour enregistr
 Vous déployez également rapidement une autre image gérant un site internet intra.Bananeo.fr permettant à vos salariés de gérer leurs heures de travail.
 
 
-Et Yop ! Tout fonctionne. Mais votre badgeuse ne communique jamais avec le site de l’intra, et il serait sympa de pouvoir préciser à vos employés leurs retards, surtout pour Éric qui trouve toujours la bonne excuse depuis 2 semaines.
+Et Yop ! Tout fonctionne. Mais votre badgeuse ne communique jamais avec le site de l’intra, et il serait sympa de pouvoir préciser à vos employés leurs retards,
+ surtout pour Éric qui trouve toujours la bonne excuse depuis 2 semaines.
 
 
 
 C’est la qu’intervient Compose!
 
-Vous allez mettre en place un fichier .yml, rappelez vous que c’est le format YAML qui permet de donner les instructions à Compose sur comment gérer ces différentes images.
+Vous allez mettre en place un fichier .yml, rappelez vous que c’est le format YAML qui permet de donner les instructions à Compose sur comment gérer ces différentes
+ images.
 
 
 Regardons de plus près comment pourrait s’écrire le fichier .yml de Bananeo :
@@ -175,7 +183,8 @@ Regardons de plus près comment pourrait s’écrire le fichier .yml de Bananeo 
 							nginx:
 								build: requirements/website/ 
 								env_file: .env          # indique le fichier optionnel contenant l'environnement
-								container_name: website # Le nom du container ( doit porter le meme nom que le service d'apres le sujet )
+								container_name: website # Le nom du container ( doit porter le meme nom que le service d'apres
+ le sujet )
 								ports:
 								- "80:80"             # le port, détaillé juste en dessous
 								restart: always         # Permet de redémarrer automatiquement le container en cas de crash
@@ -198,7 +207,8 @@ Non, ce docker-compose.yml ne fonctionne pas sur Inception.
 
 Ce fichier .yml permet de donner les instructions à Compose pour gérer 3 images mariadb, NGINX et WordPress.
 
-Tel un Dockerfile qui doit obligatoirement commencer par FROM suivi de la version, votre fichier YAML doit commencer par la version de Compose, référerez vous aux versions actuelles.
+Tel un Dockerfile qui doit obligatoirement commencer par FROM suivi de la version, votre fichier YAML doit commencer par la version de Compose, référerez
+ vous aux versions actuelles.
 
 
 2. Comprendre le sujet:
@@ -223,7 +233,8 @@ Voici les deux volumes à mettre en place d’après le sujet :
 Ces volumes doivent être disponibles à partir du dossier /home/<login>/data de la machine hôte utilisant Docker.
 
 💡
-Les volumes Compose présentent plusieurs avantages comme pouvoir être gérés à l'aide des commandes de la CLI de Docker ou de son API ou encore pouvoir être partagés de manière plus sûre entre plusieurs conteneurs.
+Les volumes Compose présentent plusieurs avantages comme pouvoir être gérés à l'aide des commandes de la CLI de Docker ou de son API ou encore pouvoir être
+ partagés de manière plus sûre entre plusieurs conteneurs.
 
 + d’info sur la doc de Docker ici
 
@@ -244,11 +255,14 @@ Afin de réaliser ces différentes tâches, le sujet apporte plusieurs autres pr
 
 📖
 Le tag latest est interdit.
-Lorsque vous précisez une dépendance à installer, vous devez préciser sa version à installer, l’avantage du tag latest est clair, installer la dernière version d’une dépendance.
+Lorsque vous précisez une dépendance à installer, vous devez préciser sa version à installer, l’avantage du tag latest est clair, installer la dernière version
+ d’une dépendance.
 
 Cependant latest a également un gros désavantage, il peut apporter des problèmes de compatibilité sur le temps.
 
-Exemple: Aujourd'hui vous pourriez tout configurer de manière a ce que les dernières versions fonctionnent correctement entre elles, mais imaginez que 2 ans après quelqu'un souhaite tester votre logiciel, il se pourrait que certaines dépendances aient évoluées et fonctionnent autrement entre elles, c’est pour cela qu’il est préférable d’indiquer la version à utiliser.
+Exemple: Aujourd'hui vous pourriez tout configurer de manière a ce que les dernières versions fonctionnent correctement entre elles, mais imaginez que 2 ans
+ après quelqu'un souhaite tester votre logiciel, il se pourrait que certaines dépendances aient évoluées et fonctionnent autrement entre elles,
+ c’est pour cela qu’il est préférable d’indiquer la version à utiliser.
 
 
 📖
@@ -261,7 +275,8 @@ Oui, il arrive que des développeurs push dans leur repo certaines informations 
 
 Évidemment ça reste l’erreur number 1 à ne pas faire.
 
-Si cela vous arrive, ne faites pas la deuxième erreur de re-push par dessus en supprimant votre clef ou votre mot de passe, les commits de Github finiront par vous trahir ❌
+Si cela vous arrive, ne faites pas la deuxième erreur de re-push par dessus en supprimant votre clef ou votre mot de passe, les commits de Github finiront
+ par vous trahir ❌
 
 Pensez plutôt à rapidement supprimer votre commit.
 
@@ -305,7 +320,8 @@ C’est à dire que le seul porte qu’ouvrira Docker-Compose sur votre machine 
 Ce schéma fournit dans le sujet devrait éclaircir les choses:
 
 
-Ici, on retrouve les ports qui permettront à WordPress de communiquer en interne avec la base de données (pour pouvoir stocker des nouvelles pages ou autres) et NGINX qui communique avec WordPress (qui lui dira quoi afficher sur le serveur web).
+Ici, on retrouve les ports qui permettront à WordPress de communiquer en interne avec la base de données (pour pouvoir stocker des nouvelles pages ou autres)
+ et NGINX qui communique avec WordPress (qui lui dira quoi afficher sur le serveur web).
 
 Le container MariaDB stocke ses informations (base de donnée) dans le volume correspondant et WordPress (site wordpress) dans le sien.
 
@@ -317,7 +333,8 @@ Mais qu’est ce que TLS ?
 
 Wikipédia nous indique :
 
-La Transport Layer Security (TLS) ou « Sécurité de la couche de transport » est un protocole de sécurisation des échanges par réseau informatique, notamment par Internet.
+La Transport Layer Security (TLS) ou « Sécurité de la couche de transport » est un protocole de sécurisation des échanges par réseau informatique, notamment par
+ Internet.
 
 
 TLS permet :
@@ -327,7 +344,8 @@ la confidentialité des données échangées (ou session chiffrée)
 l'intégrité des données échangées
 de manière optionnelle, l'authentification du client (mais dans la réalité celle-ci est souvent assurée par la couche applicative)
 
-Je ne sais pas vous mais TLS me semble ressembler de très près a du SSL, ce fameux protocole qui rajoute un cadenas vert quand vous accédez à un site sécurisé, comme la plupart des sites aujourd'hui.
+Je ne sais pas vous mais TLS me semble ressembler de très près a du SSL, ce fameux protocole qui rajoute un cadenas vert quand vous accédez à un site sécurisé,
+ comme la plupart des sites aujourd'hui.
 
 💡
 C’est ce protocole qui change vos URL de http en https.
@@ -339,7 +357,8 @@ Quelle est la différence entre TLS et SSL ?
 SSL et TLS sont deux protocoles qui permettent l’authentification, et le chiffrement des données qui transitent entre des serveurs.
 
 
-En fait le SSL est le prédécesseur du TLS. Au fil du temps, de nouvelles versions de ces protocoles ont vu le jour pour faire face aux vulnérabilités et prendre en charge des suites et des algorithmes de chiffrement toujours plus forts, toujours plus sécurisés 🔐
+En fait le SSL est le prédécesseur du TLS. Au fil du temps, de nouvelles versions de ces protocoles ont vu le jour pour faire face aux vulnérabilités et prendre
+ en charge des suites et des algorithmes de chiffrement toujours plus forts, toujours plus sécurisés 🔐
 
 
 L’histoire du SSL/TSL :
@@ -414,7 +433,8 @@ Avant de commencer notre projet, regardons le dernier document fourni avec le su
 💡
 Évitons de négliger ce genre d’information fournie avec le sujet, elle peut déjà nous aider à démarrer le projet.
 
-Cette structure nous montre clairement qu’il doit y avoir un dossier principal srcs contenant notre fameux docker-compose.yml que nous avons vu juste au dessus, notre fichier .env, ainsi qu’un dossier requirements qui contiendra nos différents containers.
+Cette structure nous montre clairement qu’il doit y avoir un dossier principal srcs contenant notre fameux docker-compose.yml que nous avons vu juste au dessus,
+ notre fichier .env, ainsi qu’un dossier requirements qui contiendra nos différents containers.
 
 
 Rappel des 3 containers à mettre en place :
@@ -427,7 +447,8 @@ Comme je l’expliquais au début, chaque container est représenté par un doss
 
 Dans chaque dossier de container doit obligatoirement se trouver son Dockerfile, sans quoi Docker serait perdu.
 
-Rappelez vous, en + du Dockerfile nous pouvons rajouter différents fichiers/dossiers de config qu'il serait ensuite intéressant de copier dans notre container grâce au Dockerfile et son mot-clef COPY.
+Rappelez vous, en + du Dockerfile nous pouvons rajouter différents fichiers/dossiers de config qu'il serait ensuite intéressant de copier dans notre container
+ grâce au Dockerfile et son mot-clef COPY.
 
 
 Le schéma fournit avec le sujet nous indique directement quels fichiers il serait intéressant de fournir avec nos containers, les voici:
@@ -477,7 +498,8 @@ Pour l’OS, nous avons donc le choix entre debian:buster ou alpine:X.XX (vérif
 
 Quelle différence entre Alpine et Debian?
 
-Alpine Linux est une distribution Linux légère, orientée sécurité, elle contient le moins de fichiers et outils possibles afin de laisser la possibilité au développeur de les installer par lui même si besoin.
+Alpine Linux est une distribution Linux légère, orientée sécurité, elle contient le moins de fichiers et outils possibles afin de laisser la possibilité
+ au développeur de les installer par lui même si besoin.
 
 Debian est le système d'exploitation universel. Les systèmes Debian utilisent actuellement le noyau Linux ou le noyau FreeBSD.
 
@@ -495,7 +517,8 @@ Maintenant j’ai envie de vous dire, si cette ligne est la seule ligne obligato
 
 Nous avons indiqué un OS à installer, nous devrions pouvoir le lancer.
 
-Le plus sympa, c’est que Docker peut nous permettre de lancer une “machine virtuelle”, mais en lui précisant, on peut également accéder à son terminal ! Utile pour voir ce qu’il y’a dedans ou effectuer nos propres tests.
+Le plus sympa, c’est que Docker peut nous permettre de lancer une “machine virtuelle”, mais en lui précisant, on peut également accéder à son terminal !
+ Utile pour voir ce qu’il y’a dedans ou effectuer nos propres tests.
 
 
 Pour cela, il faut connaitre les commandes indispensables aux containers de Docker.
@@ -536,7 +559,8 @@ Connaitre les images actuelles (après un build réussi) :    docker image ls
 
 🥳 Vous devriez visualiser votre première image !
 
-😕 Cependant celle ci n’a pas de nom en dessous de REPOSITORY, il est indiqué <none>, meme si on peut relier cette image à son ID présent dans la quatrième colonne, le sujet nous demande que le nom de l’image porte le nom du container associé, ici NGINX.
+😕 Cependant celle ci n’a pas de nom en dessous de REPOSITORY, il est indiqué <none>, meme si on peut relier cette image à son ID présent dans la quatrième colonne,
+ le sujet nous demande que le nom de l’image porte le nom du container associé, ici NGINX.
 
 Et on peut faire cela ! Il suffit simplement de préciser quand on build l’image, son nom, grace au flag -t
 
@@ -601,8 +625,11 @@ Maintenant vous êtes dans votre container, vous pouvez installer ce que vous vo
 Commençons par mettre à jour apt dans le terminal du container
 
 💡
-APT est un utilitaire de ligne de commande permettant d'installer, de mettre à jour, de supprimer et de gérer les paquets deb sur Ubuntu, Debian et les distributions Linux associées.
-APT est donc un gestionnaire de paquet pour Debian, pour être certain que la version d’APT installée sur ce container connait les dernières versions des paquets, nous allons lui demander de vérifier les mises à jour en utilisant :     apt update    , si tout va bien APT devra répondre : All packages are up to date.
+APT est un utilitaire de ligne de commande permettant d'installer, de mettre à jour, de supprimer et de gérer les paquets deb sur Ubuntu, Debian et
+ les distributions Linux associées.
+APT est donc un gestionnaire de paquet pour Debian, pour être certain que la version d’APT installée sur ce container connait les dernières versions
+ des paquets, nous allons lui demander de vérifier les mises à jour en utilisant :     apt update    , si tout va bien APT devra répondre :
+ All packages are up to date.
 
 Nous pouvons rajouter    apt upgrade     pour installer des éventuelles mises à jour de paquets trouvés.
 
@@ -652,10 +679,12 @@ Cela donne :    RUN apt install nginx -y
 
 Tentons de build à nouveau… Ça fonctionne !
 
-Vous pouvez désormais rentrer dans votre container avec     docker run -it nginx     et vous retrouver à nouveau dans le container, mais cette fois l’installation de Nginx est déjà effectuée !
+Vous pouvez désormais rentrer dans votre container avec     docker run -it nginx     et vous retrouver à nouveau dans le container, mais cette fois
+ l’installation de Nginx est déjà effectuée !
 
 
-Histoire de pouvoir être à l’aise en accédant au terminal du container, je vais installer vim et curl. Libre à vous d’installer les packages qui vous semblent utiles :
+Histoire de pouvoir être à l’aise en accédant au terminal du container, je vais installer vim et curl. Libre à vous d’installer les packages qui vous
+ semblent utiles :
 
    RUN apt install vim -y    
 
@@ -692,7 +721,8 @@ Nous rajouterons ensuite le mot clef -x509 pour préciser le type du certificat.
    openssl req -x509
 
 
-Maintenant si nous créons notre certificat, OpenSSL nous demandera un mot de passe, et souvenez vous, si on demande quelque chose à saisir dans le démarrage du container, celui-ci ne va pas pouvoir se build. Il faut donc éviter cela à tout prix !
+Maintenant si nous créons notre certificat, OpenSSL nous demandera un mot de passe, et souvenez vous, si on demande quelque chose à saisir dans le
+ démarrage du container, celui-ci ne va pas pouvoir se build. Il faut donc éviter cela à tout prix !
 
 
 Heureusement, OpenSSL a prévu le coup, avec l’option -nodes, notre clef privée se retrouvera simplement sans mot de passe.
@@ -724,7 +754,8 @@ Nous allons ensuite créer un dossier qui nous permettra de stocker les fichiers
    RUN mkdir -p /var/run/nginx
 
 
-Désormais il faudrait modifier le fichier de configuration de NGINX comme on le souhaite. Pour cela, nous pourrions faire des redirections de certaines phrases dans le fichier de config, mais nous allons plutôt utiliser le mot clef COPY du Dockerfile, qui a l’air fait pour ça.
+Désormais il faudrait modifier le fichier de configuration de NGINX comme on le souhaite. Pour cela, nous pourrions faire des redirections de certaines
+ phrases dans le fichier de config, mais nous allons plutôt utiliser le mot clef COPY du Dockerfile, qui a l’air fait pour ça.
 
 
 Nous allons donc prendre le fichier de config de NGINX de base et nous le modifierons après. Il se trouve dans    /etc/nginx/nginx.conf
@@ -738,7 +769,8 @@ En rajoutant la ligne :
 
    COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-Le fichier de configuration de NGINX devrait être remplacé par le notre au démarrage du container, faisons un test en rajoutant la phrase “yes we can” en commentaire au début de notre fichier nginx.conf dans le dossier conf.
+Le fichier de configuration de NGINX devrait être remplacé par le notre au démarrage du container, faisons un test en rajoutant la phrase “yes we can”
+ en commentaire au début de notre fichier nginx.conf dans le dossier conf.
 
 
 Si tout va bien, en buildant le container, et en le lancant, vous devriez voir votre fichier conf de NGINX modifié en y accédant avec vim par exemple.
@@ -755,8 +787,8 @@ Voici la configuration de base que l’on peut trouver :
 
 					
 						server {
-							listen 443;											❯ Depuis la version 1.12 de NGINX, il faut préciser ssl.
-							ssl on;												❯ Inutile depuis la version 1.12
+							listen 443;		❯ Depuis la version 1.12 de NGINX, il faut préciser ssl.
+							ssl on;			❯ Inutile depuis la version 1.12
 							ssl_protocols TLSv1 TLSv1.1 TLSv1.2;				❯ Gardons TLSv1.2 & TLSv1.3
 							ssl_certificate /etc/nginx/ssl/bundle.crt;			❯ Indiquons notre certificat
 							ssl_certificate_key /etc/nginx/ssl/private.key;		❯ et notre clef
@@ -784,7 +816,8 @@ Je vais préciser le dossier d’accueil en ajoutant    root /var/www/wordpress;
 
 C’est le dossier où se trouvera WordPress et donc sa première page à afficher.
 
-Je vais également préciser quelle page afficher en premier, dans le cadre de WordPress il faut indiquer index.php, mais je vais également en ajouter d’autres qui me semblent importantes.
+Je vais également préciser quelle page afficher en premier, dans le cadre de WordPress il faut indiquer index.php, mais je vais également en ajouter
+ d’autres qui me semblent importantes.
 
    index index.php index.html index.htm;
 
@@ -856,7 +889,8 @@ Maintenant il ne reste plus qu’à lancer NGINX, nous utiliserons le mot clef  
 Cela lancera NGINX en premier plan pour que le container ne se stop pas.
 
 
-Vous pourriez voir la page d’accueil de NGINX en allant sur localhost, en utilisant https (car vous n’avez pas ouvert le http). Il faudrait aussi changer le root du fichier de configuration et enlever le  wordpress:9000  pour le php, car vous n’avez pas encore le container du PHP (WordPress)
+Vous pourriez voir la page d’accueil de NGINX en allant sur localhost, en utilisant https (car vous n’avez pas ouvert le http).
+ Il faudrait aussi changer le root du fichier de configuration et enlever le  wordpress:9000  pour le php, car vous n’avez pas encore le container du PHP (WordPress)
 
 
 
@@ -876,7 +910,9 @@ Il serait donc plus judicieux de tout comprendre sur les bases de données et co
 4. Container MARIADB :
 
 
-MariaDB est un système de gestion de base de données édité sous licence GPL. Il s'agit d'un embranchement communautaire de MySQL : la gouvernance du projet est assurée par la fondation MariaDB.
+MariaDB est un système de gestion de base de données édité sous licence GPL. Il s'agit d'un embranchement communautaire de MySQL :
+ la gouvernance du projet est 
+assurée par la fondation MariaDB.
 
 
 En gros, MariaDB est quasiment une copie de MySQL, mais pourquoi ?
@@ -890,7 +926,9 @@ Pour empêcher cela, la fondation MariaDB crée une version quasi-identique à M
 
 Le fonctionnement d’une base de données comme MySQL :
 
-La gestion des données est basée sur un modèle de tableaux; toutes les données traitées sur MySQL sont stockées dans des tableaux pouvant être reliés les uns aux autres via des clés. En voici un exemple :
+La gestion des données est basée sur un modèle de tableaux; toutes les données traitées sur MySQL sont stockées dans des tableaux pouvant
+ être reliés les uns 
+aux autres via des clés. En voici un exemple :
 
 
 
@@ -902,7 +940,8 @@ MAJ : Ce tutoriel indique parfaitement comment créer une base de données avec 
 
 Tutoriel pour utiliser MySQL/MariaDB:
 
-Pour commencer et pouvoir faire vos tests aussi de votre côté, nous allons créer un Dockerfile minimum pour MariaDB. Si vous vous souvenez de ce qu’on a fait pour le début de NGINX, on a simplement besoin de commencer par d’écrire   FROM debian:buster.
+Pour commencer et pouvoir faire vos tests aussi de votre côté, nous allons créer un Dockerfile minimum pour MariaDB. Si vous vous souvenez de ce qu’on a
+ fait pour le début de NGINX, on a simplement besoin de commencer par d’écrire   FROM debian:buster.
 
 À partir de là, on peut build et lancer le container en rentrant dans son terminal (remontez plus haut pour retrouver comment si besoin)
 
@@ -969,17 +1008,20 @@ Le fichier de configuration de MariaDB:
 C’est donc l’essentiel du fichier de config de base, sauf que nous, nous n’avons pas besoin de cette partie qui concerne le côté client.
 
 
-On commence par les crochets  [mysqld]  dans le fichier pour indiquer à quelle catégorie va suivre la configuration suivante (c’est comme cela que fonctionne le fichier de configuration de MySQL)
+On commence par les crochets  [mysqld]  dans le fichier pour indiquer à quelle catégorie va suivre la configuration suivante (c’est comme cela que fonctionne le 
+fichier de configuration de MySQL)
 
 C’est ici que nous pouvons préciser à MySQL sur quel port communiquer, indiqué par le sujet, c’est le 3306 📡 avec port = 3306
 
-Après, on précise également que toutes les IP du réseau peuvent se connecter, pour cela c’est la ligne  bind_address=* , qui en gros veut dire:  bind_address=XXX.XXX.XX.XX
+Après, on précise également que toutes les IP du réseau peuvent se connecter, pour cela c’est la ligne  bind_address=* ,
+ qui en gros veut dire:  bind_address=XXX.XXX.XX.XX
 
 On peut également lui préciser notre dossier qui stockera notre base de données avec  datadir=/var/lib/mysql
 
 J'ajoute l’utilisateur avec  user=mysql
 
-Je ne suis pas sûr que ce soit obligatoire car c’est le chemin de base, mais je précise également où MySQL peut trouver la socket pour communiquer avec :    socket = /run/mysqld/mysqld.sock
+Je ne suis pas sûr que ce soit obligatoire car c’est le chemin de base, mais je précise également où MySQL peut trouver la socket pour communiquer
+ avec :    socket = /run/mysqld/mysqld.sock
 
 
 Ok good !
@@ -1023,7 +1065,8 @@ Ensuite il faut créer notre table !
 
 					mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 				
-❯ Je demande de créer une table si elle n’existe pas déjà, du nom de la variable d’environnement SQL_DATABASE, indiqué dans mon fichier .env qui sera envoyé par le docker-compose.yml.
+❯ Je demande de créer une table si elle n’existe pas déjà, du nom de la variable d’environnement SQL_DATABASE, indiqué dans mon fichier .env qui sera 
+envoyé par le docker-compose.yml.
 
 
 La table est créée! Je vais ensuite créer un utilisateur qui pourra la manipuler.
@@ -1075,7 +1118,8 @@ Puis d’un   docker run -it mariadb
 Si tout va bien, vous devriez avoir un petit [OK] qui indique que MySQL à été lancé sans problème, et si tout va bien, vous devriez également avoir une erreur!
 
 
-Celle-ci devrait indiquer que vous n’avez indiqué aucun mot de passe, ni d’utilisateur lors de la configuration, normal ! Vous avez indiqué des variables d’environnement et celle-ci seront envoyées par docker-compose. Vu que vous démarrez le container seul, il ne trouve pas ces variables.
+Celle-ci devrait indiquer que vous n’avez indiqué aucun mot de passe, ni d’utilisateur lors de la configuration, normal ! Vous avez indiqué des variables 
+d’environnement et celle-ci seront envoyées par docker-compose. Vu que vous démarrez le container seul, il ne trouve pas ces variables.
 
 
 Rien à faire, si MySQL démarre et indique au moins [OK] c’est que vous avez terminé cette partie.
@@ -1089,7 +1133,8 @@ Rien à faire, si MySQL démarre et indique au moins [OK] c’est que vous avez 
 Mettons en place WordPress!
 
 
-On a de la chance, WordPress est utilisé par plus de 43% des sites dans le monde, c’est leur page d’accueil qui l’indique. Par conséquent, nous devrions trouver un grand nombre de documentation à son sujet.
+On a de la chance, WordPress est utilisé par plus de 43% des sites dans le monde, c’est leur page d’accueil qui l’indique. Par conséquent, 
+nous devrions trouver un grand nombre de documentation à son sujet.
 
 
 Commençons comme d’habitude par un Dockerfile sous debian:buster.
@@ -1152,7 +1197,8 @@ Maintenant que WordPress est installé, mais pas configuré, occupons nous de PH
 PHP sert à Wordpress, la plupart des fichiers de WordPress sont des .php.
 
 💡
-PHP est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP, mais pouvant également fonctionner comme n'importe quel langage interprété de façon locale.
+PHP est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques via un serveur HTTP, mais pouvant également
+ fonctionner comme n'importe quel langage interprété de façon locale.
 
 Une fois qu’il est installé avec APT, nous pouvons modifier son fichier de configuration.
 
@@ -1167,7 +1213,8 @@ Mais j’ai également modifié la ligne  listen. J’ai indiqué qu’il devait
 Grosso modo ca donne :    listen=wordpress:9000
 
 
-PHP est prêt, et oui, enfin après il faut évidemment demander au Dockerfile de copier le fichier de configuration au bon endroit dans le container, mais ça inutile de vous l’expliquer vous devriez déjà être des experts dans le domaine.
+PHP est prêt, et oui, enfin après il faut évidemment demander au Dockerfile de copier le fichier de configuration au bon endroit dans le container,
+ mais ça inutile de vous l’expliquer vous devriez déjà être des experts dans le domaine.
 
 
 Place à la configuration de notre ami WordPress.
@@ -1189,7 +1236,8 @@ Jetez un oeil à ce super tuto.
 
 
 💡
-Une CLI c'est une interface textuelle qui traite les commandes vers un programme informatique. Il existe différentes interfaces de ligne de commande, telles que DOL et Shell Bash.
+Une CLI c'est une interface textuelle qui traite les commandes vers un programme informatique. Il existe différentes interfaces de ligne de commande,
+ telles que DOL et Shell Bash.
 
 Je fonce sur cette idée qui m’a l’air bien sympa, il faut déjà réutiliser wget pour installer le CLI.
 
@@ -1209,7 +1257,8 @@ Il faut ensuite lui donner les bons droits ainsi que le placer dans les binaires
 
 Ok top ! On a installé le CLI de WordPress 📄
 
-Maintenant il faudrait l’utiliser, pour cela on va faire comme avec MariaDB, créer un petit script bash qu’on copiera et qui effectuera les commandes à notre place au lancement du container.
+Maintenant il faudrait l’utiliser, pour cela on va faire comme avec MariaDB, créer un petit script bash qu’on copiera et qui effectuera les commandes
+ à notre place au lancement du container.
 
 
 Je crée donc un  auto_config.sh  que je place dans le dossier  conf  de WordPress.
@@ -1217,7 +1266,8 @@ Je crée donc un  auto_config.sh  que je place dans le dossier  conf  de WordPre
 
 Dans celui ci, je vais, par précaution mettre un  sleep 10  afin d’être certain que la base de données MariaDB a bien eu le temps de se lancer correctement.
 
-Ensuite, et uniquement si notre fichier  wp-config.php  n’existe pas (nous ne voudrions pas reconfigurer WordPress à chaque lancement non ?) , nous utilisons la commande  wp config create  du CLI pour indiquer les informations dont WordPress a besoin.
+Ensuite, et uniquement si notre fichier  wp-config.php  n’existe pas (nous ne voudrions pas reconfigurer WordPress à chaque lancement non ?) , nous utilisons
+ la commande  wp config create  du CLI pour indiquer les informations dont WordPress a besoin.
 
 
 Nous pourrions remplir ces informations à la main directement en accédant à localhost en lançant notre container.
@@ -1246,16 +1296,20 @@ Cela donnerait quelque chose comme ça :
 ❯ À indiquer directement après notre sleep dans notre fichier auto_config.sh
 
 
-Maintenant si nous lançons le container WordPress, ça ne devrait plus être la page que je vous ai montré juste au dessus mais la deuxième, celle-ci est bien plus sympa.
+Maintenant si nous lançons le container WordPress, ça ne devrait plus être la page que je vous ai montré juste au dessus mais la deuxième,
+ celle-ci est bien plus sympa.
 
 
 
-C’est la page qui demande de choisir un titre pour votre site, ainsi qu’un nom d’utilisateur et un mot de passe, mais la impossible d’avoir faux car c’est à vous de le choisir 😎
+C’est la page qui demande de choisir un titre pour votre site, ainsi qu’un nom d’utilisateur et un mot de passe, mais la impossible d’avoir
+ faux car c’est à vous de le choisir 😎
 
-Pour moi, il serait normal de laisser cette page de configuration à remplir, mais le sujet demande qu’elle soit également automatiquement configurée, car celui-ci demande qu’il y ait 2 utilisateurs WordPress, et c’est sur cette page qu’on peut configurer le premier.
+Pour moi, il serait normal de laisser cette page de configuration à remplir, mais le sujet demande qu’elle soit également automatiquement
+ configurée, car celui-ci demande qu’il y ait 2 utilisateurs WordPress, et c’est sur cette page qu’on peut configurer le premier.
 
 
-Je vous laisse regarder la doc du CLI mais celui ci propose de configurer cette deuxième page automatiquement avec la commande  wp core install  et même d’ajouter un autre utilisateur avec la commande  wp user create . Franchement je vous laisse la partie la plus simple.
+Je vous laisse regarder la doc du CLI mais celui ci propose de configurer cette deuxième page automatiquement avec la commande  wp core install
+  et même d’ajouter un autre utilisateur avec la commande  wp user create . Franchement je vous laisse la partie la plus simple.
 
 
 Plus qu’à copier le fichier  auto_config.sh  dans votre container et l’exécuter avec le mot clef ENTRYPOINT.
@@ -1323,7 +1377,7 @@ Place au service NGINX. Ici c’est le même principe, sauf deux choses qui chan
 							- wordpress:/var/www/wordpress
 							networks:
 							- inception
-							depends_on:        			 # Nouvelle ligne, indiquant de ne pas démarrer NGINX tant que WordPress n'a pas démarré.
+							depends_on:    # Nouvelle ligne, indiquant de ne pas démarrer NGINX tant que WordPress n'a pas démarré.
 							- wordpress
 							build: 
 							context: requirements/nginx
@@ -1348,7 +1402,7 @@ C’est bon, vous l’avez ? Faisons de même pour WordPress.
 							build: 
 							context: requirements/wordpress
 							dockerfile: Dockerfile
-							depends_on:    					# WordPress démarrera uniquement après MariaDB (sinon il ne pourra pas configurer la base de données...)
+						depends_on:#WordPress démarrera uniquement après MariaDB (sinon il ne pourra pas configurer la base de données...)
 							- mariadb
 							restart: on-failure
 							expose: 
@@ -1367,15 +1421,20 @@ Parlons rapidement de la ligne Volumes:
 
 Nous assignons un volume à MariaDB, comme nous allons le faire avec WordPress.
 
-C’est un prérequis du sujet. Nous devons permettre la persistance des données, pour cela nous allons stocker certains dossiers directement sur notre ordinateur en local.
+C’est un prérequis du sujet. Nous devons permettre la persistance des données, pour cela nous allons stocker certains dossiers directement
+ sur notre ordinateur en local.
 
 
-Et oui, imaginez que votre container WordPress crash ou s’éteint, et que par pur hasard, celui-ci a perdu tous vos fichiers, ce serait bien embêtant, c’est pour cela que nous préférerons les stocker directement en local, et docker-compose nous le permet.
+Et oui, imaginez que votre container WordPress crash ou s’éteint, et que par pur hasard, celui-ci a perdu tous vos fichiers, ce serait bien embêtant,
+ c’est pour cela que nous préférerons les stocker directement en local, et docker-compose nous le permet.
 
-Dans le cas d’Inception, nous allons stocker les dossiers de MySQL se trouvant dans  /var/lib/mysql  et WordPress dans  var/www/wordpress . Ceux sont les paths que j’indique après la ligne volume. Encore une fois c’est le sujet qui nous le demande.
+Dans le cas d’Inception, nous allons stocker les dossiers de MySQL se trouvant dans  /var/lib/mysql  et WordPress dans  var/www/wordpress .
+ Ceux sont les paths que j’indique après la ligne volume. Encore une fois c’est le sujet qui nous le demande.
 
 
-Ici à la ligne volume nous indiquons MariaDB (c’est le nom du volume, nous aurions pu l’appeler vol_maria ou autre, évidemment il fera intervenir une ligne concernant les volumes dans le docker-compose.yml qui permettra d’indiquer où le stocker en local) suivi de  :  avec l’endroit que nous souhaitons copier du container.
+Ici à la ligne volume nous indiquons MariaDB (c’est le nom du volume, nous aurions pu l’appeler vol_maria ou autre, évidemment il fera intervenir
+ une ligne concernant les volumes dans le docker-compose.yml qui permettra d’indiquer où le stocker en local) suivi de  :  avec l’endroit que nous
+ souhaitons copier du container.
 
 
 Il ne manque plus qu’à préciser les volumes que nous avons indiqués :
@@ -1385,15 +1444,16 @@ Il ne manque plus qu’à préciser les volumes que nous avons indiqués :
 							wordpress:
 								driver: local # ici nous stockons le volume en local
 								driver_opts:
-								type: 'none' 									# aucun type spécifique
+								type: 'none' 						# aucun type spécifique
 								o: 'bind
 								device: '/Users/login/data/wordpress' 		#Ou stocker le dossier sur votre ordinateur en local
 							mariadb:
 								driver: local
 								driver_opts:
 								type: 'none' 
-								o: 'bind'										 # Les Bind Mounts sont des volumes qui se montent sur un chemin d'accès à l'hôte, et ils peuvent être modifiés par d'autres processus en dehors de docker.
-								device: '/Users/login/data/mariadb'			#Ou stocker le dossier sur votre ordinateur en local
+								o: 'bind' # Les Bind Mounts sont des volumes qui 
+se montent sur un chemin d'accès à l'hôte, et ils peuvent être modifiés par d'autres processus en dehors de docker.
+								device: '/Users/login/data/mariadb'	# Ou stocker le dossier sur votre ordinateur en local
 					
 				
 ❯ Cette doc de docker explique bien comment gérer les volumes dans un docker-compose.
@@ -1460,21 +1520,27 @@ Après de longues visites sur le site de StackOverFlow j’ai finalement ajouté
 À priori, il ne vous reste plus qu’à faire un Makefile et vous êtes bon 🤩
 
 
-Ah oui, j’ai choisi d'ajouter un mini script bash qui configure automatiquement les bon path dans docker-compose.yml, toujours sympa quand un ami veut tester le projet sur son ordinateur, il n’a pas à chercher chaque path dans tous les fichiers pour les changer.
+Ah oui, j’ai choisi d'ajouter un mini script bash qui configure automatiquement les bon path dans docker-compose.yml, toujours sympa quand un ami veut
+ tester le projet sur son ordinateur, il n’a pas à chercher chaque path dans tous les fichiers pour les changer.
 
 
 
-Si vous tentez de vous connecter à localhost ou 127.0.0.1 depuis votre navigateur (après avoir lancé votre container évidemment) vous ne verrez sûrement rien apparaitre. Normal nous n’avons ouvert que le port 443 comme port d’écoute.
+Si vous tentez de vous connecter à localhost ou 127.0.0.1 depuis votre navigateur (après avoir lancé votre container évidemment) vous ne verrez sûrement
+ rien apparaitre. Normal nous n’avons ouvert que le port 443 comme port d’écoute.
 
 
-Le port 443 correspondant au port SSL nous devons donc nous y connecter en utilisant  https://  et non  http://, car ce dernier nous emmènerait sur le port standard 80, que nous aurions sûrement configuré sur un site classique (celui-ci aurait redirigé vers le 443). Mais ici le sujet interdit l’ouverture d’un autre port que le 443.
+Le port 443 correspondant au port SSL nous devons donc nous y connecter en utilisant  https://  et non  http://, car ce dernier nous emmènerait sur le port
+ standard 80, que nous aurions sûrement configuré sur un site classique (celui-ci aurait redirigé vers le 443). Mais ici le sujet interdit l’ouverture d’un
+ autre port que le 443.
 
 
 Autre souci, selon votre navigateur, celui-ci devrait afficher un message d’alerte indiquant que ce site tente surement de vous voler des informations sensibles.
 
-Dans le language d’un dev, cela veut dire que le certificat SSL n’a pas été signé par Trusted Authority. Nous ne pouvons rien y faire quand il s’agit d’un projet en local et encore moins avec un certificat généré par OpenSSL.
+Dans le language d’un dev, cela veut dire que le certificat SSL n’a pas été signé par Trusted Authority. Nous ne pouvons rien y faire quand il s’agit d’un projet
+ en local et encore moins avec un certificat généré par OpenSSL.
 
-Cependant, nous pouvons tout de même entrer sur le site. Pour Safari, il existe un bouton qui demande tout de même l’accès au site. Sur Chrome, il existe un petit secret, il suffit de taper le mot  thisisunsafe  quand vous êtes sur la page d’alerte.
+Cependant, nous pouvons tout de même entrer sur le site. Pour Safari, il existe un bouton qui demande tout de même l’accès au site. Sur Chrome,
+ il existe un petit secret, il suffit de taper le mot  thisisunsafe  quand vous êtes sur la page d’alerte.
 
 Et voilà, vous devriez arriver sur votre site.
 
@@ -1485,15 +1551,19 @@ Ce nom de domaine sera login.42.fr. Une fois de plus, vous utiliserez votre logi
 ❯ Ici il s’agit uniquement d’une configuration à effectuer sur votre machine en local.
 
 
-En gros vous pouvez déjà accéder au site depuis localhost, qui (ce mot) redirige en fait sur l’IP 127.0.0.1, sans vous le dire, mais tout cela est en fait écrit dans un fichier de votre ordinateur.
+En gros vous pouvez déjà accéder au site depuis localhost, qui (ce mot) redirige en fait sur l’IP 127.0.0.1, sans vous le dire, mais tout cela est en fait
+ écrit dans un fichier de votre ordinateur.
 
 
-Ce fichier est très sensible et il vous faudra l’éditer avec un  sudo . En effet, c’est un fichier très visé par les hackers, il permettrait de vous rediriger facilement sur un faux google quand vous tapez google.fr, par exemple.
+Ce fichier est très sensible et il vous faudra l’éditer avec un  sudo . En effet, c’est un fichier très visé par les hackers, il permettrait de vous rediriger
+ facilement sur un faux google quand vous tapez google.fr, par exemple.
 
-En éditant ce fichier qui se trouve généralement ici :  /etc/hosts  vous pourrez facilement demander la redirection de 127.0.0.1 sur l’IP que vous voudrez, comme login.42.fr
+En éditant ce fichier qui se trouve généralement ici :  /etc/hosts  vous pourrez facilement demander la redirection de 127.0.0.1 sur l’IP que vous voudrez,
+ comme login.42.fr
 
 💡
-N’oubliez pas de modifier cet IP dans le fichier de conf de NGINX dans la case  server_name , le mieux serait de le faire aussi dans la génération du certificat SSL, mais bon, celui-ci n’est pas authentifié…
+N’oubliez pas de modifier cet IP dans le fichier de conf de NGINX dans la case  server_name , le mieux serait de le faire aussi dans la génération du certificat
+ SSL, mais bon, celui-ci n’est pas authentifié…
 
 À priori vous respectez maintenant toutes les règles du sujet.
 
