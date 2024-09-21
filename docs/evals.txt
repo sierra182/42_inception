@@ -1,3 +1,116 @@
+Échelle pour le projet Inception
+Vous devez évaluer 1 étudiant dans cette équipe.
+
+Introduction
+Veuillez respecter les règles suivantes :
+
+Restez poli, courtois, respectueux et constructif tout au long du processus d’évaluation. Le bien-être de la communauté en dépend.
+Identifiez avec l’étudiant ou le groupe les éventuels dysfonctionnements dans leur projet. Prenez le temps de discuter et de débattre des problèmes
+ qui pourraient avoir été identifiés.
+Gardez à l’esprit qu’il peut y avoir des différences dans la manière dont vos pairs ont compris les instructions et la portée des fonctionnalités du projet.
+ Restez toujours ouvert d’esprit et évaluez de manière aussi honnête que possible. La pédagogie n’est utile que si l’évaluation par les pairs est effectuée 
+sérieusement.
+Directives
+Ne notez que le travail rendu dans le dépôt Git de l’étudiant ou du groupe évalué.
+Vérifiez que le dépôt Git appartient bien à l’étudiant ou au groupe. Assurez-vous que le projet est celui attendu. Vérifiez également que la commande git clone
+ est utilisée dans un dossier vide.
+Soyez vigilant et assurez-vous qu’aucun alias malveillant n’est utilisé pour vous tromper et vous faire évaluer quelque chose qui ne fait pas partie du contenu
+ du dépôt officiel.
+Pour éviter les surprises, et si applicable, examinez ensemble tout script utilisé pour faciliter la notation (scripts de tests ou d’automatisation).
+Si vous n’avez pas réalisé le projet que vous allez évaluer, vous devez lire l’ensemble du sujet avant de commencer l’évaluation.
+Utilisez les drapeaux disponibles pour signaler un dépôt vide, un programme qui ne fonctionne pas, une erreur de norme, de la triche, etc. Dans ces cas,
+ le processus d’évaluation s’arrête et la note finale est de 0, ou de -42 en cas de triche. Cependant, sauf en cas de triche, il est fortement encouragé de revoir
+ ensemble le travail rendu afin d’identifier les erreurs à ne pas reproduire.
+Annexes
+subject.pdf
+
+Préliminaires
+Si une tricherie est suspectée, l’évaluation s’arrête ici. Utilisez le drapeau "Cheat" pour le signaler. Prenez cette décision calmement, judicieusement, et 
+utilisez ce bouton avec précaution.
+
+Tests préliminaires
+Toutes les informations d’identification (credentials), clés API, et variables d’environnement doivent être définies dans un fichier .env pendant l’évaluation. 
+Si des informations d’identification ou des clés API sont disponibles dans le dépôt Git en dehors du fichier .env créé lors de l’évaluation, l’évaluation s’arrête 
+et la note est de 0.
+La défense ne peut avoir lieu que si l’étudiant ou le groupe est présent. Cela permet à chacun d’apprendre en partageant des connaissances.
+Si aucun travail n’a été soumis (fichiers incorrects, mauvais répertoire ou noms de fichiers incorrects), la note est de 0 et l’évaluation s’arrête.
+Pour ce projet, vous devez cloner leur dépôt Git sur leur station.
+
+Instructions générales
+Si vous ne savez pas comment vérifier une exigence ou un critère, l’étudiant doit vous aider.
+
+Assurez-vous que tous les fichiers nécessaires pour configurer l’application sont situés dans un dossier srcs. Ce dossier doit se trouver à la racine du dépôt.
+
+Assurez-vous qu’un Makefile est présent à la racine du dépôt.
+
+Avant de commencer l’évaluation, exécutez cette commande dans le terminal :
+
+bash
+Copier le code
+docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q);
+ docker network rm $(docker network ls -q) 2>/dev/null
+Lisez le fichier docker-compose.yml. Il ne doit pas y avoir de network: host ni de links:. Sinon, l’évaluation s’arrête.
+
+Le fichier docker-compose.yml doit comporter des network(s). Sinon, l’évaluation s’arrête.
+
+Examinez les Dockerfiles et les scripts où Docker est utilisé. Aucune commande --link ne doit y figurer. Sinon, l’évaluation s’arrête.
+
+Vérifiez que les Dockerfiles ne contiennent pas de commandes en arrière-plan dans la section ENTRYPOINT (par exemple, tail -f, nginx & bash, etc.).
+ Sinon, l’évaluation s’arrête.
+
+Vérifiez que les containers sont construits à partir de la version stable avant-dernière d'Alpine ou de Debian.
+
+Si le ENTRYPOINT est un script, assurez-vous qu’il ne lance pas de processus en arrière-plan (par exemple, nginx & bash).
+
+Partie obligatoire
+Le projet consiste à mettre en place une petite infrastructure composée de différents services en utilisant docker-compose. Vérifiez les points suivants :
+
+Vue d'ensemble du projet
+L’étudiant doit vous expliquer de manière simple :
+
+Comment fonctionnent Docker et docker-compose.
+La différence entre une image Docker utilisée avec et sans docker-compose.
+L’intérêt de Docker par rapport aux machines virtuelles.
+La pertinence de la structure de répertoire requise pour ce projet (un exemple est fourni dans le sujet).
+Installation simple
+Assurez-vous que NGINX est accessible uniquement via le port 443.
+Assurez-vous qu’un certificat SSL/TLS est utilisé.
+Vérifiez que le site WordPress est bien installé et configuré. Vous ne devriez pas voir la page d’installation de WordPress.
+Ouvrez https://login.42.fr dans votre navigateur (où login est le login de l’étudiant). Vous ne devriez pas pouvoir accéder au site via http://login.42.fr.
+Les bases de Docker
+Vérifiez les Dockerfiles : il doit y en avoir un par service, et ils ne doivent pas être vides.
+Assurez-vous que chaque container est construit à partir de la version stable avant-dernière d'Alpine ou de Debian.
+Les images Docker doivent porter le même nom que le service correspondant.
+Réseau Docker
+Assurez-vous que docker-network est utilisé.
+L’étudiant doit expliquer simplement le fonctionnement de docker-network.
+NGINX avec SSL/TLS
+Vérifiez qu’un Dockerfile est présent.
+Essayez d'accéder au service via HTTP (port 80) et vérifiez que la connexion échoue.
+Utilisez un certificat TLS v1.2 ou v1.3.
+WordPress avec php-fpm et son volume
+Vérifiez qu’un Dockerfile est présent.
+Assurez-vous qu’il n’y a pas de NGINX dans le Dockerfile.
+Vérifiez qu’un volume est utilisé pour stocker les données de WordPress.
+MariaDB et son volume
+Vérifiez qu’un Dockerfile est présent.
+Assurez-vous qu’il n’y a pas de NGINX dans le Dockerfile.
+Vérifiez qu’un volume est utilisé pour les données de la base de données MariaDB.
+Persistance
+Cette partie est assez simple. Vous devez redémarrer la machine virtuelle. Une fois redémarrée, lancez à nouveau docker-compose. Ensuite,
+ vérifiez que tout fonctionne correctement et que WordPress et MariaDB sont toujours configurés. Les modifications que vous avez apportées précédemment
+ au site WordPress devraient être toujours présentes. Si un des points ci-dessus n'est pas correct, l'évaluation s'arrête ici.
+Bonus
+Évaluez la partie bonus seulement si la partie obligatoire a été réalisée entièrement et parfaitement, et que la gestion des erreurs prend en charge 
+les utilisations inattendues ou incorrectes. Si tous les points obligatoires n'ont pas été validés durant la défense, les points de bonus doivent être
+ totalement ignorés.
+
+Ajoutez 1 point par bonus autorisé dans le sujet.
+
+Vérifiez et testez le bon fonctionnement et l'implémentation de chaque service supplémentaire.
+
+Pour le service de libre choix, l'étudiant évalué doit vous fournir une explication simple sur son fonctionnement et vous expliquer pourquoi il est utile.
+
 Scale for project Inception
 You should evaluate 1 student in this team
 Introduction
