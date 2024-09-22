@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 09:37:30 by seblin            #+#    #+#              #
-#    Updated: 2024/09/22 14:05:51 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/22 18:20:23 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,5 +28,4 @@ COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
-# CMD ["sh", "-c", "sleep 25 && nginx -g 'daemon off;'"]
+CMD [ "nginx", "-g", "daemon off;" ]

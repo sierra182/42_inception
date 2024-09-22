@@ -28,4 +28,4 @@ else
 	echo "User $(cat ${WORDPRESS_USER_FILE}) already exists.";
 fi
 
-exec $@
+exec "$@"

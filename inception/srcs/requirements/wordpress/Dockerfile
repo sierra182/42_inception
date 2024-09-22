@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/09/22 18:20:29 by seblin            #+#    #+#              #
+#    Updated: 2024/09/22 18:20:31 by seblin           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 FROM debian:11
 
 RUN apt-get update && apt-get install -y \
@@ -58,5 +70,6 @@ EXPOSE 9000
 
 COPY ./tools/init_wp.sh /usr/local/bin/init_wp.sh
 RUN chmod +x /usr/local/bin/init_wp.sh
+
 ENTRYPOINT [ "init_wp.sh" ]
-CMD ["php-fpm7.4", "-F"]
+CMD [ "php-fpm7.4", "-F" ]

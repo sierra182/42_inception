@@ -20,4 +20,5 @@ mysql -u root -p$(cat ${MYSQL_ROOT_PASSWORD_FILE}) \
 
 echo "Database configured successfully!"
 mysqladmin -u root -p$(cat ${MYSQL_ROOT_PASSWORD_FILE}) shutdown
-exec mysqld_safe 
+
+exec "$@" 
