@@ -4,7 +4,6 @@ until mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent; do
 	echo "Waiting for MariaDB...";
 	sleep 5;
 done;
-
 echo "MariaDB is ready!"
 
 if ! wp core is-installed --path=/var/www/html --allow-root; then
@@ -29,4 +28,4 @@ else
 	echo "User $(cat ${WORDPRESS_USER_FILE}) already exists.";
 fi
 
-php-fpm7.4 -F
+exec $@

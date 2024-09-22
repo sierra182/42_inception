@@ -59,4 +59,4 @@ EXPOSE 9000
 COPY ./tools/init_wp.sh /usr/local/bin/init_wp.sh
 RUN chmod +x /usr/local/bin/init_wp.sh
 ENTRYPOINT [ "init_wp.sh" ]
-# CMD ["php-fpm7.4", "-F"]
+CMD ["php-fpm7.4", "-F"]
