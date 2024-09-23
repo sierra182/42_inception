@@ -15,8 +15,8 @@ version: '3.8'
 services:
 
   mariadb:
-    container_name: maria
-    image: maria
+    container_name: mariadb
+    image: mariadb42
     build:
       context: ./requirements/mariadb
     environment:
@@ -34,10 +34,10 @@ services:
       - db_root_password
       - db_password
       - db_user
-
+ 
   wordpress:
     container_name: wordpress
-    image: wordpress
+    image: wordpress42
     build:
       context: ./requirements/wordpress
     environment:
@@ -53,6 +53,7 @@ services:
 
       WORDPRESS_USER_FILE: ${WORDPRESS_USER_FILE}
       WORDPRESS_PASSWORD_FILE: ${WORDPRESS_PASSWORD_FILE}
+    
     secrets:
       - db_user
       - db_password
@@ -70,7 +71,7 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx
+    image: nginx42
     build:
       context: ./requirements/nginx
     ports:    
@@ -99,21 +100,36 @@ volumes:
 
 networks:
   internal:
-    driver: bridge
+    driver: overlay
 
+# secrets:
+#   db_root_password:
+#     file: ../secrets/db_root_password
+#   db_password:
+#     file: ../secrets/db_password
+#   db_user:
+#     file: ../secrets/db_user
+#   wp_user:
+#     file: ../secrets/wp_user
+#   wp_password:
+#     file: ../secrets/wp_password
+#   wp_adm_user:
+#     file: ../secrets/wp_adm_user
+#   wp_adm_password:
+#     file: ../secrets/wp_adm_password
+    
 secrets:
   db_root_password:
-    file: ../secrets/db_root_password
+    external: true
   db_password:
-    file: ../secrets/db_password
+    external: true
   db_user:
-    file: ../secrets/db_user
+    external: true
   wp_user:
-    file: ../secrets/wp_user
+    external: true
   wp_password:
-    file: ../secrets/wp_password
+    external: true
   wp_adm_user:
-    file: ../secrets/wp_adm_user
+    external: true
   wp_adm_password:
-    file: ../secrets/wp_adm_password  
-    
+    external: true
