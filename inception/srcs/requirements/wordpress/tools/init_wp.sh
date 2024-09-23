@@ -21,7 +21,8 @@ fi
 
 if ! wp user get $(cat ${WORDPRESS_USER_FILE}) \
 	--path=/var/www/html --allow-root >/dev/null 2>&1; then
-		wp user create $(cat ${WORDPRESS_USER_FILE}) dupont@example.com \
+		wp user create $(cat ${WORDPRESS_USER_FILE}) \
+		$(cat ${WORDPRESS_USER_FILE})@42.fr \
 		--role=editor --user_pass=$(cat ${WORDPRESS_PASSWORD_FILE}) \
 		--path=/var/www/html --allow-root;
 else
