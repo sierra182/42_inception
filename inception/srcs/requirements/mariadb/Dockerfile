@@ -6,22 +6,19 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 18:22:58 by seblin            #+#    #+#              #
-#    Updated: 2024/09/22 18:22:59 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/23 12:13:32 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:11
 
-RUN  apt-get update \	
-	&& apt-get install -y mariadb-server \
+RUN apt-get update && apt-get install -y \
+	mariadb-server \
     && apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
 	
 RUN mkdir -p /run/mysqld \
     && chown -R mysql:mysql /run/mysqld
-	
-# RUN sed -i 's/bind-address\s*=.*/bind-address = 0.0.0.0/' \
-# 	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
