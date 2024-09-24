@@ -1,5 +1,5 @@
 #!bin/bash
-
+sleep 17;
 until mysqladmin ping -h"${WORDPRESS_DB_HOST}"; do
 	echo "Waiting for MariaDB...";
 	sleep 5;

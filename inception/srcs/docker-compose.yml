@@ -15,8 +15,7 @@ version: '3.8'
 services:
 
   mariadb:
-    container_name: mariadb
-    image: mariadb
+    container_name: mariadb   
     build:
       context: ./requirements/mariadb
     environment:
@@ -36,7 +35,6 @@ services:
  
   wordpress:
     container_name: wordpress
-    image: wordpress
     build:
       context: ./requirements/wordpress
     environment:
@@ -69,7 +67,6 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx
     build:
       context: ./requirements/nginx
     ports:    

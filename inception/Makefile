@@ -6,9 +6,10 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/23 21:59:25 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/24 09:56:43 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 up:
 	docker-compose -f ./srcs/docker-compose.yml up --build
@@ -40,13 +41,15 @@ flush_vols:
 		/home/svidot/data/maria_data/* \
 		/home/svidot/data/wordpress_data/*
 
-# docker secret create db_root_password ./secrets/db_root_password
-# docker secret create db_password ./secrets/db_password
-# docker secret create db_user ./secrets/db_user
-# docker secret create wp_user ./secrets/wp_user
-# docker secret create wp_password ./secrets/wp_password
-# docker secret create wp_adm_user ./secrets/wp_adm_user
-# docker secret create wp_adm_password ./secrets/wp_adm_password
+secret:
+	-docker secret create db_root_password ./secrets/db_root_password
+	-docker secret create db_password ./secrets/db_password
+	-docker secret create db_user ./secrets/db_user
+	-docker secret create wp_user ./secrets/wp_user
+	-docker secret create wp_password ./secrets/wp_password
+	-docker secret create wp_adm_user ./secrets/wp_adm_user
+	-docker secret create wp_adm_password ./secrets/wp_adm_password
+
 # docker swarm init
 # docker swarm leave --force
 # docker swarm info
