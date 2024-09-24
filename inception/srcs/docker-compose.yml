@@ -16,15 +16,14 @@ services:
 
   mariadb:
     container_name: mariadb
-    image: mariadb42
+    image: mariadb
     build:
       context: ./requirements/mariadb
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD_FILE: ${MYSQL_ROOT_PASSWORD_FILE}
       MYSQL_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
-      MYSQL_USER_FILE: ${MYSQL_USER_FILE} 
-  
+      MYSQL_USER_FILE: ${MYSQL_USER_FILE}   
     volumes:
       - maria_data:/var/lib/mysql
     networks:
@@ -37,7 +36,7 @@ services:
  
   wordpress:
     container_name: wordpress
-    image: wordpress42
+    image: wordpress
     build:
       context: ./requirements/wordpress
     environment:
@@ -52,8 +51,7 @@ services:
       WORDPRESS_ADM_PASSWORD_FILE: ${WORDPRESS_ADM_PASSWORD_FILE}
 
       WORDPRESS_USER_FILE: ${WORDPRESS_USER_FILE}
-      WORDPRESS_PASSWORD_FILE: ${WORDPRESS_PASSWORD_FILE}
-    
+      WORDPRESS_PASSWORD_FILE: ${WORDPRESS_PASSWORD_FILE}    
     secrets:
       - db_user
       - db_password
@@ -71,7 +69,7 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx42
+    image: nginx
     build:
       context: ./requirements/nginx
     ports:    
@@ -100,36 +98,36 @@ volumes:
 
 networks:
   internal:
-    driver: overlay
+    driver: bridge
 
-# secrets:
-#   db_root_password:
-#     file: ../secrets/db_root_password
-#   db_password:
-#     file: ../secrets/db_password
-#   db_user:
-#     file: ../secrets/db_user
-#   wp_user:
-#     file: ../secrets/wp_user
-#   wp_password:
-#     file: ../secrets/wp_password
-#   wp_adm_user:
-#     file: ../secrets/wp_adm_user
-#   wp_adm_password:
-#     file: ../secrets/wp_adm_password
-    
 secrets:
   db_root_password:
-    external: true
+    file: ../secrets/db_root_password
   db_password:
-    external: true
+    file: ../secrets/db_password
   db_user:
-    external: true
+    file: ../secrets/db_user
   wp_user:
-    external: true
+    file: ../secrets/wp_user
   wp_password:
-    external: true
+    file: ../secrets/wp_password
   wp_adm_user:
-    external: true
+    file: ../secrets/wp_adm_user
   wp_adm_password:
-    external: true
+    file: ../secrets/wp_adm_password
+    
+# secrets:
+#   db_root_password:
+#     external: true
+#   db_password:
+#     external: true
+#   db_user:
+#     external: true
+#   wp_user:
+#     external: true
+#   wp_password:
+#     external: true
+#   wp_adm_user:
+#     external: true
+#   wp_adm_password:
+#     external: true

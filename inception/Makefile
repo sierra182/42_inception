@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/23 20:52:45 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/23 21:59:25 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,3 +47,6 @@ flush_vols:
 # docker secret create wp_password ./secrets/wp_password
 # docker secret create wp_adm_user ./secrets/wp_adm_user
 # docker secret create wp_adm_password ./secrets/wp_adm_password
+# docker swarm init
+# docker swarm leave --force
+# docker swarm info
