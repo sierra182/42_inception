@@ -6,58 +6,77 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 17:20:24 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 20:17:57 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+			#*********************** basics ***********************#																	
 start:
 	docker-compose -f ./srcs/docker-compose.yml start
 	
 stop:
 	docker-compose -f ./srcs/docker-compose.yml stop
+		
 	
-up:
-	docker-compose -f ./srcs/docker-compose.yml up
-	
-down:
-	docker-compose -f ./srcs/docker-compose.yml down
-	
-f_up:
-	docker-compose -f ./srcs/docker-compose.yml up --build
-	
-f_down:
-	docker-compose -f ./srcs/docker-compose.yml down --volumes --rmi all
-	docker network prune -f
-	$(MAKE) clean
-	$(MAKE) flush_vols
-
+			#********************* cleanning *********************#
 clean:
 	-docker stop $$(docker ps -qa)
 	-docker rm $$(docker ps -qa)
 	-docker rmi -f $$(docker images -qa)
-	-docker volume rm $$(docker volume ls -q);
+	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls -q)
 
-deploy:
-	-docker network create --driver overlay ingress
-	docker build -t mariadb42 ./srcs/requirements/mariadb \
-		&& docker build -t wordpress42 ./srcs/requirements/wordpress \
-		&& docker build -t nginx42 ./srcs/requirements/nginx \
-		&& docker stack deploy --compose-file ./srcs/docker-compose.yml \
+flush_vols:	
+	sudo rm -rf \
+		/home/svidot/data/maria_data/* \
+		/home/svidot/data/wordpress_data/*
+		
+		
+			#********************* composing *********************#			
+s_up:
+	docker-compose -f ./srcs/docker-compose.yml up
+	
+s_down:
+	docker-compose -f ./srcs/docker-compose.yml down
+	
+up:
+	docker-compose -f ./srcs/docker-compose.yml up --build
+	
+down:
+	docker-compose -f ./srcs/docker-compose.yml down --volumes --rmi all
+	docker network prune -f
+	$(MAKE) clean	
+	
+f_down: down
+	$(MAKE) flush_vols
+	
+	
+			#********************* deploying *********************#			
+s_deploy:
+	docker stack deploy --compose-file ./srcs/docker-compose.yml \
 			mystack --detach=false
+s_undeploy:
+	docker stack rm mystack
+			
+deploy: swarm
+	-docker build -t mariadb42 ./srcs/requirements/mariadb 
+	-docker build -t wordpress42 ./srcs/requirements/wordpress 
+	-docker build -t nginx42 ./srcs/requirements/nginx 
+	-docker stack deploy --compose-file ./srcs/docker-compose.yml mystack \
+		--detach=false
 	
 undeploy:	
 	docker stack rm mystack
 	docker network prune -f
 	-docker service rm $(shell docker service ls -q)
-	$(MAKE) clean
+	$(MAKE) clean	
+	$(MAKE) swarm_leave
+
+f_undeploy:	undeploy	
 	$(MAKE) flush_vols
 	
-flush_vols:	
-	sudo rm -rf \
-		/home/svidot/data/maria_data/* \
-		/home/svidot/data/wordpress_data/*
-
+	
+			#********************** secrets **********************#			
 swarm:
 	-docker swarm init
 	$(MAKE) secret
@@ -82,8 +101,11 @@ secret:
 	-docker secret create nonce_salt ./secrets/php_keys/nonce_salt
 	-docker secret create secure_auth_key ./secrets/php_keys/secure_auth_key
 	-docker secret create secure_auth_salt ./secrets/php_keys/secure_auth_salt
-	
-#******** get certificate *********
+
+
+			#*********************** utils ***********************#
+			
+#******** get certificate ********#
 
 # RUN mkdir -p /etc/nginx/ssl && \
 # 	openssl req -x509 -nodes -days 365 \
