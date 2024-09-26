@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 09:37:30 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 11:21:28 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 11:44:26 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ FROM debian:11
 RUN apt-get update && apt-get install -y \
     nginx \
     openssl \
+	procps \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
