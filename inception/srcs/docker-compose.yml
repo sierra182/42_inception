@@ -16,16 +16,16 @@ services:
 
   mariadb:
     container_name: mariadb  
-    # image: mariadb42 
+    image: mariadb42 
     build:
       context: ./requirements/mariadb
-    # env_file:
-    #   - db.env
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD_FILE: ${MYSQL_ROOT_PASSWORD_FILE}
-      MYSQL_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
-      MYSQL_USER_FILE: ${MYSQL_USER_FILE}   
+    env_file:
+      - db.env
+    # environment:
+    #   MYSQL_DATABASE: ${MYSQL_DATABASE}
+    #   MYSQL_ROOT_PASSWORD_FILE: ${MYSQL_ROOT_PASSWORD_FILE}
+    #   MYSQL_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
+    #   MYSQL_USER_FILE: ${MYSQL_USER_FILE}   
     volumes:
       - maria_data:/var/lib/mysql
     networks:
@@ -40,29 +40,29 @@ services:
 
   wordpress:
     container_name: wordpress
-    # image: wordpress42
+    image: wordpress42
     build:
       context: ./requirements/wordpress
-    # env_file:
-    #   - wp.env
+    env_file:
+      - wp.env
       # args:
       #   WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       #   WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
         # WORDPRESS_DB_USER_FILE: ${MYSQL_USER_FILE}
         # WORDPRESS_DB_PASSWORD_FILE: ${WORDPRESS_DB_PASSWORD_FILE}
-    environment:
-      DOMAIN_NAME: ${DOMAIN_NAME}
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}                 
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+    # environment:
+    #   DOMAIN_NAME: ${DOMAIN_NAME}
+    #   WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}                 
+    #   WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
 
-      WORDPRESS_DB_USER_FILE: ${MYSQL_USER_FILE}
-      WORDPRESS_DB_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
+    #   WORDPRESS_DB_USER_FILE: ${MYSQL_USER_FILE}
+    #   WORDPRESS_DB_PASSWORD_FILE: ${MYSQL_PASSWORD_FILE}
 
-      WORDPRESS_ADM_USER_FILE: ${WORDPRESS_ADM_USER_FILE}
-      WORDPRESS_ADM_PASSWORD_FILE: ${WORDPRESS_ADM_PASSWORD_FILE}
+    #   WORDPRESS_ADM_USER_FILE: ${WORDPRESS_ADM_USER_FILE}
+    #   WORDPRESS_ADM_PASSWORD_FILE: ${WORDPRESS_ADM_PASSWORD_FILE}
 
-      WORDPRESS_USER_FILE: ${WORDPRESS_USER_FILE}
-      WORDPRESS_PASSWORD_FILE: ${WORDPRESS_PASSWORD_FILE}    
+    #   WORDPRESS_USER_FILE: ${WORDPRESS_USER_FILE}
+    #   WORDPRESS_PASSWORD_FILE: ${WORDPRESS_PASSWORD_FILE}    
     secrets:
       - db_user
       - db_password
@@ -90,7 +90,7 @@ services:
 
   nginx:
     container_name: nginx
-    # image: nginx42
+    image: nginx42
     build:
       context: ./requirements/nginx
     ports:    
@@ -122,72 +122,72 @@ volumes:
 
 networks:
   internal:
-    driver: bridge
-
-secrets:
-  db_root_password:
-    file: ../secrets/db_root_password
-  db_password:
-    file: ../secrets/db_password
-  db_user:
-    file: ../secrets/db_user
-  wp_user:
-    file: ../secrets/wp_user
-  wp_password:
-    file: ../secrets/wp_password
-  wp_adm_user:
-    file: ../secrets/wp_adm_user
-  wp_adm_password:
-    file: ../secrets/wp_adm_password
-  ng_key:
-    file: ../secrets/nginx.key
-  auth_key:
-    file: ../secrets/php_keys/auth_key 
-  auth_salt:
-    file: ../secrets/php_keys/auth_salt
-  logged_in_key:
-    file: ../secrets/php_keys/logged_in_key
-  logged_in_salt:
-    file: ../secrets/php_keys/logged_in_salt
-  nonce_key:
-    file: ../secrets/php_keys/nonce_key
-  nonce_salt:
-    file: ../secrets/php_keys/nonce_salt
-  secure_auth_key:
-    file: ../secrets/php_keys/secure_auth_key
-  secure_auth_salt:
-    file: ../secrets/php_keys/secure_auth_salt
+    driver: overlay
 
 # secrets:
 #   db_root_password:
-#     external: true
+#     file: ../secrets/db_root_password
 #   db_password:
-#     external: true
+#     file: ../secrets/db_password
 #   db_user:
-#     external: true
+#     file: ../secrets/db_user
 #   wp_user:
-#     external: true
+#     file: ../secrets/wp_user
 #   wp_password:
-#     external: true
+#     file: ../secrets/wp_password
 #   wp_adm_user:
-#     external: true
+#     file: ../secrets/wp_adm_user
 #   wp_adm_password:
-#     external: true
+#     file: ../secrets/wp_adm_password
 #   ng_key:
-#     external: true
+#     file: ../secrets/nginx.key
 #   auth_key:
-#     external: true 
+#     file: ../secrets/php_keys/auth_key 
 #   auth_salt:
-#     external: true
+#     file: ../secrets/php_keys/auth_salt
 #   logged_in_key:
-#     external: true
+#     file: ../secrets/php_keys/logged_in_key
 #   logged_in_salt:
-#     external: true
+#     file: ../secrets/php_keys/logged_in_salt
 #   nonce_key:
-#     external: true
+#     file: ../secrets/php_keys/nonce_key
 #   nonce_salt:
-#     external: true
+#     file: ../secrets/php_keys/nonce_salt
 #   secure_auth_key:
-#     external: true
+#     file: ../secrets/php_keys/secure_auth_key
 #   secure_auth_salt:
-#     external: true
+#     file: ../secrets/php_keys/secure_auth_salt
+
+secrets:
+  db_root_password:
+    external: true
+  db_password:
+    external: true
+  db_user:
+    external: true
+  wp_user:
+    external: true
+  wp_password:
+    external: true
+  wp_adm_user:
+    external: true
+  wp_adm_password:
+    external: true
+  ng_key:
+    external: true
+  auth_key:
+    external: true 
+  auth_salt:
+    external: true
+  logged_in_key:
+    external: true
+  logged_in_salt:
+    external: true
+  nonce_key:
+    external: true
+  nonce_salt:
+    external: true
+  secure_auth_key:
+    external: true
+  secure_auth_salt:
+    external: true
