@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 20:17:57 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 21:16:41 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ f_down: down
 	
 			#********************* deploying *********************#			
 s_deploy:
-	docker stack deploy --compose-file ./srcs/docker-compose.yml \
+	docker stack deploy --compose-file ./srcs/docker-compose-swarm.yml \
 			mystack --detach=false
 s_undeploy:
 	docker stack rm mystack
@@ -62,9 +62,9 @@ deploy: swarm
 	-docker build -t mariadb42 ./srcs/requirements/mariadb 
 	-docker build -t wordpress42 ./srcs/requirements/wordpress 
 	-docker build -t nginx42 ./srcs/requirements/nginx 
-	-docker stack deploy --compose-file ./srcs/docker-compose.yml mystack \
-		--detach=false
-	
+	-docker stack deploy --compose-file ./srcs/docker-compose-swarm.yml \
+		mystack --detach=false
+
 undeploy:	
 	docker stack rm mystack
 	docker network prune -f

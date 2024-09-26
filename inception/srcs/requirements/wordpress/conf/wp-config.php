@@ -50,14 +50,14 @@ define( 'DB_COLLATE', '' );
  * @since 2.6.0
  */
 
-define('AUTH_KEY',         trim(file_get_contents('/run/secrets/auth_key')));
-define('SECURE_AUTH_KEY',  trim(file_get_contents('/run/secrets/secure_auth_key')));
-define('LOGGED_IN_KEY',    trim(file_get_contents('/run/secrets/logged_in_key')));
-define('NONCE_KEY',        trim(file_get_contents('/run/secrets/nonce_key')));
-define('AUTH_SALT',        trim(file_get_contents('/run/secrets/auth_salt')));
-define('SECURE_AUTH_SALT', trim(file_get_contents('/run/secrets/secure_auth_salt')));
-define('LOGGED_IN_SALT',   trim(file_get_contents('/run/secrets/logged_in_salt')));
-define('NONCE_SALT',       trim(file_get_contents('/run/secrets/nonce_salt')));
+define('AUTH_KEY',         trim(file_get_contents(getenv('WORDPRESS_AUTH_KEY_FILE'))));
+define('SECURE_AUTH_KEY',  trim(file_get_contents(getenv('WORDPRESS_SECURE_AUTH_KEY_FILE'))));
+define('LOGGED_IN_KEY',    trim(file_get_contents(getenv('WORDPRESS_LOGGED_IN_KEY_FILE'))));
+define('NONCE_KEY',        trim(file_get_contents(getenv('WORDPRESS_NONCE_KEY_FILE'))));
+define('AUTH_SALT',        trim(file_get_contents(getenv('WORDPRESS_AUTH_SALT_FILE'))));
+define('SECURE_AUTH_SALT', trim(file_get_contents(getenv('WORDPRESS_SECURE_AUTH_SALT_FILE'))));
+define('LOGGED_IN_SALT',   trim(file_get_contents(getenv('WORDPRESS_LOGGED_IN_SALT_FILE'))));
+define('NONCE_SALT',       trim(file_get_contents(getenv('WORDPRESS_NONCE_SALT_FILE'))));
 
 /**#@-*/
 /**
