@@ -79,7 +79,9 @@ services:
     ports:    
       - "443:443"
     volumes:
-      - wordpress_data:/var/www/html 
+      - wordpress_data:/var/www/html
+    secrets:
+      - ng_key 
     networks:
       - internal
     depends_on:
@@ -119,6 +121,8 @@ secrets:
     file: ../secrets/wp_adm_user
   wp_adm_password:
     file: ../secrets/wp_adm_password
+  ng_key:
+    file: ../secrets/nginx.key
     
 # secrets:
 #   db_root_password:
