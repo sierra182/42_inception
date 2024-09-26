@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 11:23:30 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 13:36:29 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,15 @@ secret:
 	-docker secret create wp_password ./secrets/wp_password
 	-docker secret create wp_adm_user ./secrets/wp_adm_user
 	-docker secret create wp_adm_password ./secrets/wp_adm_password
-	-docker secret create wp_adm_password ./secrets/nginx.key
+	-docker secret create nginx.key ./secrets/nginx.key
+	-docker secret create auth_key ./secrets/auth_key
+	-docker secret create auth_salt ./secrets/auth_salt
+	-docker secret create logged_in_key ./secrets/logged_in_key
+	-docker secret create logged_in_salt ./secrets/logged_in_salt
+	-docker secret create nonce_key ./secrets/nonce_key
+	-docker secret create nonce_salt ./secrets/nonce_salt
+	-docker secret create secure_auth_key ./secrets/secure_auth_key
+	-docker secret create secure_auth_salt ./secrets/secure_auth_salt
 	
 #******** get certificate *********
 

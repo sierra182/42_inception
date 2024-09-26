@@ -9,10 +9,10 @@ echo "MariaDB is ready!"
 if ! wp core is-installed --path=/var/www/html --allow-root; then
 	wp core install --path=/var/www/html \
 	--url="https://${DOMAIN_NAME}" \
-	--title="Mon Super Site" \
+	--title="Mon Site Pas Terrible" \
 	--admin_user="$(cat ${WORDPRESS_ADM_USER_FILE})" \
 	--admin_password="$(cat ${WORDPRESS_ADM_PASSWORD_FILE})" \
-	--admin_email="admin@exemple.com" \
+	--admin_email="sauron@exemple.com" \
 	--skip-email \
 	--locale="fr_FR" --allow-root;
 else

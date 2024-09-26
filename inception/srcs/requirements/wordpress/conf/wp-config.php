@@ -50,15 +50,22 @@ define( 'DB_COLLATE', '' );
  * @since 2.6.0
  */
 
-define('AUTH_KEY',         '(HE@W#V$&b):^W4x)0I~,F>J=5snW=ajgBNH2*P!5YR&W2qakv@D C)jczVY9yM>');
-define('SECURE_AUTH_KEY',  'p ,4$P s,cz_%adLb.QU+xAPS~g;fF2$!(yDoJG1[L{o`J+<0>a%F{a@jew~{QOB');
-define('LOGGED_IN_KEY',    '5i3N}+#XSg,G%{!DH%Za8VmQ~x+N6*~)ac$MQO:|%piO8n;OOj9QmE/FQ}aWdNO|');
-define('NONCE_KEY',        'b*a-;9}z%Q>>iO)~e~Xu5bZEn-*+w|rni<KF>[4l&l76Bzexy1?E VG_L@576vc)');
-define('AUTH_SALT',        'vm]F>56m(v9t(vw_9P+;*tu0CP0)1K/>/gG;CS9, ^Ptmb,,Hnlp:V~4Mf4sto-D');
-define('SECURE_AUTH_SALT', 'iA0yt1:sv.n<I+6Qz%D <m<2H1W1S<m7k;oSKJ0}[qo_Tms;Vvt7-GGQ5.4Eb|Gi');
-define('LOGGED_IN_SALT',   'w~AnV!FTqP}aH<La`6`G4NHOA Xw3f<~Zi@Fq+|EX7SPtaS+Ws`7f%FK%B5^ VQz');
-define('NONCE_SALT',       'x+gLW}DoVWV4U|%(}e 7fr0.Rh5a)PAlAqoD~opRx(eV$KtCtB-9JU|xUq*Q,>Kg');
-
+// define('AUTH_KEY',         '(HE@W#V$&b):^W4x)0I~,F>J=5snW=ajgBNH2*P!5YR&W2qakv@D C)jczVY9yM>');
+// define('SECURE_AUTH_KEY',  'p ,4$P s,cz_%adLb.QU+xAPS~g;fF2$!(yDoJG1[L{o`J+<0>a%F{a@jew~{QOB');
+// define('LOGGED_IN_KEY',    '5i3N}+#XSg,G%{!DH%Za8VmQ~x+N6*~)ac$MQO:|%piO8n;OOj9QmE/FQ}aWdNO|');
+// define('NONCE_KEY',        'b*a-;9}z%Q>>iO)~e~Xu5bZEn-*+w|rni<KF>[4l&l76Bzexy1?E VG_L@576vc)');
+// define('AUTH_SALT',        'vm]F>56m(v9t(vw_9P+;*tu0CP0)1K/>/gG;CS9, ^Ptmb,,Hnlp:V~4Mf4sto-D');
+// define('SECURE_AUTH_SALT', 'iA0yt1:sv.n<I+6Qz%D <m<2H1W1S<m7k;oSKJ0}[qo_Tms;Vvt7-GGQ5.4Eb|Gi');
+// define('LOGGED_IN_SALT',   'w~AnV!FTqP}aH<La`6`G4NHOA Xw3f<~Zi@Fq+|EX7SPtaS+Ws`7f%FK%B5^ VQz');
+// define('NONCE_SALT',       'x+gLW}DoVWV4U|%(}e 7fr0.Rh5a)PAlAqoD~opRx(eV$KtCtB-9JU|xUq*Q,>Kg');
+define('AUTH_KEY',         trim(file_get_contents('/run/secrets/auth_key')));
+define('SECURE_AUTH_KEY',  trim(file_get_contents('/run/secrets/secure_auth_key')));
+define('LOGGED_IN_KEY',    trim(file_get_contents('/run/secrets/logged_in_key')));
+define('NONCE_KEY',        trim(file_get_contents('/run/secrets/nonce_key')));
+define('AUTH_SALT',        trim(file_get_contents('/run/secrets/auth_salt')));
+define('SECURE_AUTH_SALT', trim(file_get_contents('/run/secrets/secure_auth_salt')));
+define('LOGGED_IN_SALT',   trim(file_get_contents('/run/secrets/logged_in_salt')));
+define('NONCE_SALT',       trim(file_get_contents('/run/secrets/nonce_salt')));
 /**#@-*/
 
 /**

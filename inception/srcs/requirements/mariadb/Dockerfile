@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 18:22:58 by seblin            #+#    #+#              #
-#    Updated: 2024/09/23 12:13:32 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 12:00:52 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY ./tools/init_db.sh /usr/local/bin/init_db.sh
 RUN chmod +x /usr/local/bin/init_db.sh
+
+EXPOSE 3306
 
 ENTRYPOINT [ "init_db.sh" ]
 CMD [ "mysqld_safe" ]
