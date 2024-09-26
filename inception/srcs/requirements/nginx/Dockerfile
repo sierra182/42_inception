@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 09:37:30 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 10:17:06 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 11:21:28 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# RUN mkdir -p /etc/nginx/ssl && \
-# 	openssl req -x509 -nodes -days 365 \
-# 	-newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key \
-# 	-out /etc/nginx/ssl/nginx.crt \
-# 	-subj "/C=FR/ST=Perpignan/L=Perpignan/O=42/OU=42/CN=svidot.42.fr"
-
-COPY ./conf/nginx.conf /etc/nginx/
-COPY ./conf/nginx.crt /etc/nginx/ssl/
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 443
 

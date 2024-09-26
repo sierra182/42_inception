@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/25 20:06:38 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/26 11:23:30 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,3 +74,12 @@ secret:
 	-docker secret create wp_password ./secrets/wp_password
 	-docker secret create wp_adm_user ./secrets/wp_adm_user
 	-docker secret create wp_adm_password ./secrets/wp_adm_password
+	-docker secret create wp_adm_password ./secrets/nginx.key
+	
+#******** get certificate *********
+
+# RUN mkdir -p /etc/nginx/ssl && \
+# 	openssl req -x509 -nodes -days 365 \
+# 	-newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key \
+# 	-out /etc/nginx/ssl/nginx.crt \
+# 	-subj "/C=FR/ST=Perpignan/L=Perpignan/O=42/OU=42/CN=svidot.42.fr"
