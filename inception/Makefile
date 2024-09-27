@@ -6,11 +6,12 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 21:16:41 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/27 20:58:35 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-			#*********************** basics ***********************#																	
+			#*********************** basics ***********************#	
+																			
 start:
 	docker-compose -f ./srcs/docker-compose.yml start
 	
@@ -19,6 +20,7 @@ stop:
 		
 	
 			#********************* cleanning *********************#
+			
 clean:
 	-docker stop $$(docker ps -qa)
 	-docker rm $$(docker ps -qa)
@@ -32,7 +34,8 @@ flush_vols:
 		/home/svidot/data/wordpress_data/*
 		
 		
-			#********************* composing *********************#			
+			#********************* composing *********************#		
+				
 s_up:
 	docker-compose -f ./srcs/docker-compose.yml up
 	
@@ -51,7 +54,8 @@ f_down: down
 	$(MAKE) flush_vols
 	
 	
-			#********************* deploying *********************#			
+			#********************* deploying *********************#		
+				
 s_deploy:
 	docker stack deploy --compose-file ./srcs/docker-compose-swarm.yml \
 			mystack --detach=false
@@ -76,7 +80,8 @@ f_undeploy:	undeploy
 	$(MAKE) flush_vols
 	
 	
-			#********************** secrets **********************#			
+			#********************** secrets **********************#		
+				
 swarm:
 	-docker swarm init
 	$(MAKE) secret
@@ -104,7 +109,26 @@ secret:
 
 
 			#*********************** utils ***********************#
-			
+
+info:
+	@echo
+	-docker ps -a
+	@echo
+	-docker images
+	@echo
+	-docker volume ls
+	@echo
+	-docker network ls
+	@echo 
+	-docker service ls
+	@echo 
+	-docker stack ls
+	@echo 
+	-docker-compose ps
+	@echo 
+	-docker secret ls
+	
+
 #******** get certificate ********#
 
 # RUN mkdir -p /etc/nginx/ssl && \

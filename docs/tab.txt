@@ -1,0 +1,54 @@
+Type d'élément	Commande pour lister	États possibles	Précision de l'état (actif/inactif)
+Conteneurs	docker ps	Actif uniquement (en cours d'exécution)	Oui (affiche uniquement les conteneurs actifs)
+docker ps -a	Actif (en cours d'exécution) ou Inactif (arrêté)	Oui (l'état de chaque conteneur est précisé : "Up" ou "Exited")
+Images	docker images	Présente sur le système (pas d'état actif/inactif)	Non (ne distingue pas l'utilisation active)
+Volumes	docker volume ls	Utilisé ou non utilisé	Non (ne précise pas directement si un volume est utilisé)
+Réseaux	docker network ls	Utilisé ou non utilisé	Non (ne précise pas directement si un réseau est utilisé, mais des réseaux comme "bridge", "host", "none" sont toujours présents)
+Services (Swarm)	docker service ls	Actif uniquement	Oui (affiche le nombre de réplicas actifs)
+Stacks (Swarm)	docker stack ls	Actif uniquement	Non (affiche seulement les stacks actives)
+Services (Compose)	docker-compose ps	Actif (en cours d'exécution) ou Inactif (arrêté)	Oui (comme docker ps -a, affiche les services actifs et arrêtés)
+
+Entity	State 1	State 2	State 3	State 4
+Containers	Running			Exited/Stopped	Paused	Removed (Unavailable)
+Images		Available		Dangling	In use	Removed
+Volumes		In use			Dangling	Not in use	Removed
+Networks	Active			Inactive	Dangling	Removed
+Services 	(Swarm)			Running	Pending	Replicated	Removed (if no tasks)
+Stacks (Swarm)	Active	Pending	Removed (if no longer active)	Removed
+
+docker system prune : Supprime tous les objets non utilisés (conteneurs arrêtés, images sans conteneurs associés, réseaux non utilisés, etc.).
+
+Options :
+--all ou -a : Supprime également les images non utilisées par des conteneurs en cours d'exécution.
+--force ou -f : Supprime sans confirmation.
+--volumes : Supprime également les volumes non utilisés.
+docker container prune : Supprime uniquement les conteneurs arrêtés.
+
+Options :
+--force ou -f : Supprime sans confirmation.
+--filter : Applique des filtres basés sur des critères spécifiques (par exemple, until=<timestamp> pour supprimer les conteneurs arrêtés avant une date).
+docker image prune : Supprime les images inutilisées (sans conteneur associé).
+
+Options :
+--all ou -a : Supprime également les images non référencées par des conteneurs.
+--force ou -f : Supprime sans confirmation.
+--filter : Applique des filtres (par exemple, until=<timestamp>).
+docker volume prune : Supprime les volumes inutilisés.
+
+Options :
+--force ou -f : Supprime sans confirmation.
+docker network prune : Supprime les réseaux non utilisés (ceux qui ne sont associés à aucun conteneur).
+
+Options :
+--force ou -f : Supprime sans confirmation.
+docker builder prune : Supprime les données de cache du builder.
+
+Options :
+--all : Supprime toutes les données de cache.
+--force ou -f : Supprime sans confirmation.
+--filter : Applique des filtres pour des suppressions plus spécifiques.
+Exemple de commande :
+bash
+Copier le code
+docker system prune --all --force --volumes
+Cette commande supprime tous les objets inutilisés, y compris les volumes et les images non utilisées, sans demander confirmation.
