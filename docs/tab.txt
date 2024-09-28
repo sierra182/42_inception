@@ -52,3 +52,91 @@ bash
 Copier le code
 docker system prune --all --force --volumes
 Cette commande supprime tous les objets inutilisés, y compris les volumes et les images non utilisées, sans demander confirmation.
+
+La commande docker system prune --all --volumes (ou docker system prune -a -v) ne supprime pas absolument tous les objets comme le feraient les commandes individuelles (docker container prune, docker image prune, docker volume prune, docker network prune, etc.), car elle cible principalement les éléments non utilisés ou dangling.
+
+Voici quelques points importants à noter :
+
+docker system prune -a -v :
+
+Supprime tous les conteneurs arrêtés.
+Supprime toutes les images inutilisées (y compris celles sans conteneurs associés ou qui ne sont plus utilisées).
+Supprime les volumes inutilisés.
+Supprime les réseaux non utilisés.
+Supprime aussi tout le build cache.
+Ne touche pas aux conteneurs en cours d'exécution ni aux volumes utilisés.
+Les commandes individuelles de prune :
+
+docker container prune : Supprime uniquement les conteneurs arrêtés.
+docker image prune : Supprime les images inutilisées (et avec l'option -a, les images sans conteneurs associés).
+docker volume prune : Supprime les volumes non utilisés.
+docker network prune : Supprime les réseaux non utilisés.
+docker builder prune : Supprime les caches du builder.
+Limites de docker system prune :
+
+Ne supprime pas les objets utilisés : Si un volume ou une image est utilisé(e) par un conteneur actif, il/elle ne sera pas supprimé(e) par docker system prune.
+Conclusion :
+docker system prune -a -v est une commande globale efficace pour un nettoyage des objets inutilisés ou dangling (conteneurs, images, volumes, réseaux), mais elle n'est pas équivalente à l'ensemble des commandes prune individuelles, car elle ne gère pas les caches du builder et n'atteint pas certains niveaux de granularité.
+
+
+Nettoyage complet en Swarm :
+Pour nettoyer complètement un environnement Swarm, y compris les services et les stacks, voici un exemple de procédure manuelle :
+
+Supprimer les services :
+
+bash
+Copier le code
+docker service rm $(docker service ls -q)
+Supprimer les stacks :
+
+bash
+Copier le code
+docker stack rm <stack_name>
+Utiliser les commandes prune pour nettoyer le reste :
+
+bash
+Copier le code
+docker system prune -a --volumes
+Conclusion :
+Dans Docker Swarm, les commandes prune fonctionnent pour nettoyer les objets non utilisés (conteneurs arrêtés, volumes, réseaux, etc.), mais ne gèrent pas les services, stacks ou secrets. Ces éléments nécessitent des commandes spécifiques pour être supprimés manuellement.
+
+
+Vous avez dit :
+estceque prune supprime les element juste stop, ou pause ?
+ChatGPT a dit :
+ChatGPT
+Les commandes prune ne suppriment que les éléments qui sont stoppés, mais pas les éléments en pause.
+
+Détails :
+Conteneurs stoppés : Un conteneur qui est complètement arrêté (non en cours d'exécution) sera supprimé par les commandes de prune. Par exemple :
+docker container prune supprimera les conteneurs arrêtés (stoppés).
+docker system prune supprimera également les conteneurs arrêtés.
+
+L'option -a dans la commande docker system prune -a -v permet de supprimer toutes les images inutilisées, y compris celles qui ne sont pas associées à un conteneur en cours d'exécution.
+
+Voici le détail des effets de chaque option dans cette commande :
+
+-a ou --all : Supprime toutes les images inutilisées, même celles qui ne sont pas référencées par des conteneurs en cours d'exécution. Sans cette option, seules les images "dangling" (celles qui n'ont pas de tag ou ne sont plus utilisées) seraient supprimées.
+
+-v ou --volumes : Supprime également tous les volumes inutilisés, c'est-à-dire les volumes qui ne sont plus associés à aucun conteneur.
+
+En résumé, la commande docker system prune -a -v :
+
+Supprime tous les conteneurs arrêtés.
+Supprime toutes les images inutilisées, qu'elles soient associées ou non à des conteneurs en cours d'exécution.
+Supprime les réseaux inutilisés.
+Supprime les volumes inutilisés.
+
+# docker stack rm mystack
+# -docker stack rm $$(docker stack ls --format '{{.Name}}')
+
+# docker network prune -f
+# -docker service rm $(shell docker service ls -q)
+
+#******** get certificate ********#
+
+# RUN mkdir -p /etc/nginx/ssl && \
+# 	openssl req -x509 -nodes -days 365 \
+# 	-newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key \
+# 	-out /etc/nginx/ssl/nginx.crt \
+# 	-subj "/C=FR/ST=Perpignan/L=Perpignan/O=42/OU=42/CN=svidot.42.fr"

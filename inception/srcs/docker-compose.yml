@@ -16,7 +16,6 @@ services:
 
   mariadb:
     container_name: mariadb  
-    image: mariadb42 
     build:
       context: ./requirements/mariadb
     environment:
@@ -36,7 +35,6 @@ services:
 
   wordpress:
     container_name: wordpress
-    image: wordpress42
     build:
       context: ./requirements/wordpress
     environment:
@@ -81,8 +79,7 @@ services:
     restart: on-failure
  
   nginx:
-    container_name: nginx
-    image: nginx42
+    container_name: nginx 
     build:
       context: ./requirements/nginx
     ports:    

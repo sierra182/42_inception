@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/09/27 20:58:35 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/28 11:19:34 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ clean:
 	-docker rm $$(docker ps -qa)
 	-docker rmi -f $$(docker images -qa)
 	-docker volume rm $$(docker volume ls -q)
-	-docker network rm $$(docker network ls -q)
-
+	-echo y | docker network rm $$(docker network ls -q)
+	
 flush_vols:	
 	sudo rm -rf \
 		/home/svidot/data/maria_data/* \
@@ -46,8 +46,7 @@ up:
 	docker-compose -f ./srcs/docker-compose.yml up --build
 	
 down:
-	docker-compose -f ./srcs/docker-compose.yml down --volumes --rmi all
-	docker network prune -f
+	docker-compose -f ./srcs/docker-compose.yml down
 	$(MAKE) clean	
 	
 f_down: down
@@ -69,14 +68,11 @@ deploy: swarm
 	-docker stack deploy --compose-file ./srcs/docker-compose-swarm.yml \
 		mystack --detach=false
 
-undeploy:	
-	docker stack rm mystack
-	docker network prune -f
-	-docker service rm $(shell docker service ls -q)
-	$(MAKE) clean	
+undeploy:
 	$(MAKE) swarm_leave
+	$(MAKE) clean
 
-f_undeploy:	undeploy	
+f_undeploy:	undeploy
 	$(MAKE) flush_vols
 	
 	
@@ -124,15 +120,6 @@ info:
 	@echo 
 	-docker stack ls
 	@echo 
-	-docker-compose ps
+	-docker-compose -f ./srcs/docker-compose.yml ps
 	@echo 
-	-docker secret ls
-	
-
-#******** get certificate ********#
-
-# RUN mkdir -p /etc/nginx/ssl && \
-# 	openssl req -x509 -nodes -days 365 \
-# 	-newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key \
-# 	-out /etc/nginx/ssl/nginx.crt \
-# 	-subj "/C=FR/ST=Perpignan/L=Perpignan/O=42/OU=42/CN=svidot.42.fr"
+	-docker secret ls	
