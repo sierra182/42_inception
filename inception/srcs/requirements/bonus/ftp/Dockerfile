@@ -5,22 +5,28 @@
 #                                                     +:+ +:+         +:+      #
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/22 09:37:30 by seblin            #+#    #+#              #
-#    Updated: 2024/09/29 14:41:50 by seblin           ###   ########.fr        #
+#    Created: 2024/09/29 12:19:09 by seblin            #+#    #+#              #
+#    Updated: 2024/09/29 16:40:12 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:11
 
-RUN apt-get update && apt-get install -y \
-    nginx \
-    openssl \
-	procps \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update && apt-get install -y vsftpd
 
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/vsftpd.conf /etc/
 
-EXPOSE 443
+# RUN groupadd ftpgroup \
+#     && useradd -g ftpgroup -d /var/www/wordpress -s /sbin/nologin ftpuser
 
-CMD [ "nginx", "-g", "daemon off;" ]
+RUN groupadd ftpgroup \
+    && useradd -g ftpgroup -d /var/www/wordpress -s /sbin/nologin ftpuser \
+    && echo "ftpuser:password" | chpasswd
+
+
+RUN mkdir -p /var/www/wordpress && \
+    chown -R ftpuser:ftpgroup /var/www/wordpress
+
+EXPOSE 21
+
+CMD ["vsftpd", "/etc/vsftpd.conf"]
