@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 12:19:09 by seblin            #+#    #+#              #
-#    Updated: 2024/09/30 16:14:55 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/30 17:19:27 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ COPY ./conf/vsftpd.conf /etc/
 
 # Créer un utilisateur FTP (ftpuser) et le définir dans le groupe www-data
 RUN groupadd ftpgroup \
-    && useradd -g www-data -d /var/www/wordpress -s /sbin/nologin ftpuser \
+    && useradd -g www-data -d /var/www/wordpress -s /bin/bash ftpuser \
     && echo "ftpuser:password" | chpasswd
 
 # Créer le répertoire pour Wordpress et définir les permissions
