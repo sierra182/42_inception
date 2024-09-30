@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 12:19:09 by seblin            #+#    #+#              #
-#    Updated: 2024/09/30 17:19:27 by seblin           ###   ########.fr        #
+#    Updated: 2024/09/30 17:54:57 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,10 @@ RUN mkdir -p /var/www/wordpress && \
 
 # Créer le répertoire secure_chroot_dir requis par vsftpd
 RUN mkdir -p /var/run/vsftpd/empty && chmod 755 /var/run/vsftpd/empty
+
+# chmod oblig ?
+RUN mkdir -p /etc/ssl/ftp && chmod 755 /etc/ssl/ftp 
+
 
 # Exposer le port 21 (FTP)
 EXPOSE 21
