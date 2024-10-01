@@ -14,6 +14,17 @@ version: '3.8'
 
 services:
 
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    ports:
+      - "6379:6379"
+    networks:
+      - internal
+    volumes:
+      - redis_data:/data
+    restart: on-failure
+
   adminer:
     container_name: adminer
     build: ./requirements/bonus/adminer
@@ -85,6 +96,7 @@ services:
       WORDPRESS_NONCE_SALT_FILE: ${WORDPRESS_NONCE_SALT_FILE}
       WORDPRESS_SECURE_AUTH_KEY_FILE: ${WORDPRESS_SECURE_AUTH_KEY_FILE}
       WORDPRESS_SECURE_AUTH_SALT_FILE: ${WORDPRESS_SECURE_AUTH_SALT_FILE}
+      WORDPRESS_CACHE_HOST: redis
     secrets:
       - db_user
       - db_password
@@ -138,6 +150,8 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/home/svidot/data/maria_data'
+  redis_data:
+    driver: local
 
 networks:
   internal:
