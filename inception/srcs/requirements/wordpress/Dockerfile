@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 18:20:29 by seblin            #+#    #+#              #
-#    Updated: 2024/09/26 21:05:41 by seblin           ###   ########.fr        #
+#    Updated: 2024/10/01 13:19:09 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,27 @@ RUN chmod -R 755 /var/www/html
 
 COPY ./tools/init_wp.sh /usr/local/bin/init_wp.sh
 RUN chmod +x /usr/local/bin/init_wp.sh
+
+
+# Installation de Redis et de l'extension PHP pour Redis
+RUN apt-get update && apt-get install -y \
+    php-redis \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Téléchargement et installation du plugin Redis Object Cache pour WordPress
+# Cette section télécharge le plugin Redis Object Cache et le place dans le dossier des plugins de WordPress.
+RUN curl -o /tmp/redis-cache.zip -fSL "https://downloads.wordpress.org/plugin/redis-cache.latest-stable.zip" \
+    && unzip /tmp/redis-cache.zip -d /var/www/html/wp-content/plugins/ \
+    && rm /tmp/redis-cache.zip
+
+# # Activation du plugin Redis Object Cache avec WP-CLI
+# # Ces commandes activent le plugin Redis pour WordPress afin qu'il soit prêt à l'usage dès le lancement du container.
+# RUN wp plugin activate redis-cache --allow-root --path=/var/www/html
+
+# # Activer Redis pour WordPress via WP-CLI
+# RUN wp redis enable --allow-root
+
 
 EXPOSE 9000
 

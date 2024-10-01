@@ -29,4 +29,12 @@ else
 	echo "User $(cat ${WORDPRESS_USER_FILE}) already exists.";
 fi
 
+# Activer le plugin Redis Object Cache
+echo "Activation du plugin Redis Object Cache..."
+wp plugin activate redis-cache --allow-root --path=/var/www/html
+
+# Activer Redis comme système de cache
+echo "Activation de Redis pour le cache WordPress..."
+wp redis enable --allow-root --path=/var/www/html
+
 exec "$@"

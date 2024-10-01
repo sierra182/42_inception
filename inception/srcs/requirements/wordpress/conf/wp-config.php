@@ -89,6 +89,7 @@ define( 'WP_DEBUG_DISPLAY', true );
 /* Add any custom values between this line and the "stop editing" line. */
 
 // define('WPLANG', 'fr_FR');
+define( 'WP_REDIS_HOST', 'redis' );
 
 /* That's all, stop editing! Happy publishing. */
 
