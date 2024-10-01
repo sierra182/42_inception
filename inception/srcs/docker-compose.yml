@@ -29,7 +29,7 @@ services:
       - ./requirements/nginx/conf/nginx.crt:/etc/ssl/ftp/nginx.crt
     networks:
       - internal     
-    restart: on-failure
+    restart: always
     secrets:
       - ng_key
 
