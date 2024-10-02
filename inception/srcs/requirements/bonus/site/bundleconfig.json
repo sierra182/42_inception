@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "wwwroot/js/start.min.js",
+    "inputFiles": [
+      "wwwroot/js/start.js"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "watcher": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/myScripts.min.js",
+    "inputFiles": [
+      "wwwroot/js/myScripts.js"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "watcher": {
+      "enabled": true
+    }
+  }
+]
