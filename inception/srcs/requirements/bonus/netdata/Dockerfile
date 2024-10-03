@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 13:10:13 by seblin            #+#    #+#              #
-#    Updated: 2024/10/03 13:17:03 by seblin           ###   ########.fr        #
+#    Updated: 2024/10/03 13:45:09 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,4 +25,3 @@ RUN bash /tmp/kickstart.sh --dont-wait --dont-start-it
 EXPOSE 19999
 
 CMD ["/usr/sbin/netdata", "-D"]
-
