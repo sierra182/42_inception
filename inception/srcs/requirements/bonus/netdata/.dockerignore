@@ -1,0 +1,31 @@
+# Exclure les dépendances locales
+node_modules/
+venv/
+.bundle/
+
+# Exclure les fichiers de versionnement
+.git/
+.svn/
+.hg/
+
+# Exclure les logs, caches et fichiers temporaires
+logs/
+*.log
+tmp/
+temp/
+
+# Exclure les fichiers de configuration locaux et secrets
+.env
+secrets/
+
+# Exclure les fichiers de build ou binaires locaux
+dist/
+build/
+*.o
+*.so
+*.exe
+
+# Exclure les fichiers et dossiers d'IDE
+.vscode/
+.idea/
+*.sublime-workspace

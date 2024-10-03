@@ -14,18 +14,16 @@ version: '3.8'
 
 services:
 
-  # site:
-  #   container_name: site
-  #   build: ./requirements/bonus/site
-  #   ports:
-  #     - "443:443"
-  #   networks:
-  #     - internal
-  #   restart: on-failure
-  #   depends_on:
-  #     - nginx
-  #   volumes:
-  #     - wordpress_data:/var/www/html
+  netdata:
+    build: ./requirements/bonus/netdata
+    ports:
+      - "19999:19999"
+    container_name: netdata
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock
 
   redis:
     container_name: redis
