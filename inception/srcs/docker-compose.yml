@@ -63,8 +63,13 @@ services:
     networks:
       - internal     
     restart: always
+    environment:
+      FTP_USER_FILE: ${FTP_USER_FILE}
+      FTP_PASSWORD_FILE: ${FTP_PASSWORD_FILE}
     secrets:
       - ng_key
+      - ftp_user
+      - ftp_password
 
   mariadb:
     container_name: mariadb  
@@ -202,3 +207,7 @@ secrets:
     file: ../secrets/php_keys/secure_auth_key
   secure_auth_salt:
     file: ../secrets/php_keys/secure_auth_salt
+  ftp_user:
+    file: ../secrets/ftp_user
+  ftp_password:
+    file: ../secrets/ftp_password
