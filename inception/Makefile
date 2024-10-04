@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 13:47:18 by seblin            #+#    #+#              #
-#    Updated: 2024/10/03 13:13:07 by seblin           ###   ########.fr        #
+#    Updated: 2024/10/04 15:48:32 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ s_down:
 	docker-compose -f ./srcs/docker-compose.yml down
 	
 up:
-	docker-compose -f ./srcs/docker-compose.yml up --build
+	docker-compose -f ./srcs/docker-compose.yml up --build -d
 	
 down:
 	docker-compose -f ./srcs/docker-compose.yml down

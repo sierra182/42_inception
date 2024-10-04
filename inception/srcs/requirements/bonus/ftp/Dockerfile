@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 12:19:09 by seblin            #+#    #+#              #
-#    Updated: 2024/10/04 11:58:25 by seblin           ###   ########.fr        #
+#    Updated: 2024/10/04 15:37:03 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ COPY ./conf/vsftpd.conf /etc/
 COPY ./tools/init_ftp.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init_ftp.sh
 
-RUN mkdir -p /var/www/wordpress && \
-    chown -R www-data:www-data /var/www/wordpress
+RUN mkdir -p /var/www/wordpress \
+	&& chown -R www-data:www-data /var/www/wordpress \
+	&& chmod -R 777 /var/www/wordpress
 	
 RUN mkdir -p /var/run/vsftpd/empty && chmod 755 /var/run/vsftpd/empty
 

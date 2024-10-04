@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/22 18:20:29 by seblin            #+#    #+#              #
-#    Updated: 2024/10/04 09:51:54 by seblin           ###   ########.fr        #
+#    Updated: 2024/10/04 15:47:34 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ COPY ./conf/wp-config.php /var/www/html/
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 
 RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
+RUN chmod -R 777 /var/www/html
 
 COPY ./tools/init_wp.sh /usr/local/bin/init_wp.sh
 RUN chmod +x /usr/local/bin/init_wp.sh
@@ -53,7 +53,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -o /tmp/redis-cache.zip -fSL \
-	"https://downloads.wordpress.org/plugin/redis-cache.latest-stable.zip" \
+	"https://downloads.wordpress.org/plugin/redis-cache.2.2.4.zip" \
     && unzip /tmp/redis-cache.zip -d /var/www/html/wp-content/plugins/ \
     && rm /tmp/redis-cache.zip
 
