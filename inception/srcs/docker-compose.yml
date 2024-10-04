@@ -53,10 +53,7 @@ services:
       context: ./requirements/bonus/ftp
     ports:
       - "21:21"
-      - "20:20"      
-      # - "10000-10100:10000-10100"
       - "40000-40005:40000-40005"
-      - "990:990"
     volumes:
       - wordpress_data:/var/www/wordpress
       - ./requirements/nginx/conf/nginx.crt:/etc/ssl/ftp/nginx.crt
