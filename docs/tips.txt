@@ -140,3 +140,8 @@ Supprime les volumes inutilisés.
 # 	-newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key \
 # 	-out /etc/nginx/ssl/nginx.crt \
 # 	-subj "/C=FR/ST=Perpignan/L=Perpignan/O=42/OU=42/CN=svidot.42.fr"
+
+Option	Redémarrage après un crash	Redémarrage après un arrêt manuel (docker stop)	Redémarrage après redémarrage du système
+on-failure	Oui, en cas d'échec	Non	Non
+unless-stopped	Oui	Non (après redémarrage manuel)	Oui (sauf s'arrêté manuellement)
+always	Oui	Oui (même après redémarrage manuel)	Oui (toujours)

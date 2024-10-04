@@ -2,8 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #15c361;
     margin: 0;
-    padding: 20px;
-	perspective: 800px; 
+    padding: 20px;	
 }
 
 h1 {
@@ -33,151 +32,241 @@ button:hover {
 } */
 
 @keyframes moveAndChangeColor3D {
-	0% {
-	  background-color: red;
-	  transform: rotateY(0deg);
-	}
-	50% {
-	  background-color: blue;
-	  transform: rotateY(180deg); /* Rotation 3D sur l'axe Y */
-	}
-	100% {
-	  background-color: green;
-	  transform: rotateY(360deg);
-	}
-  }
-
-#one {
-    background-color: red;
-    width: 50px;
-    height: 50px;
+    0% {	
+        transform: translate3d(0px, 0px, 0px) rotate3d(1, 1, 0, 0deg); /* Pas de rotation au début */
+    }
+    50% {
+        transform: translate3d(50px, 200px, -580px) rotate3d(1, 1, 0, 180deg); /* Rotation à 180 degrés sur un axe diagonal */
+    }
+    100% {
+        transform: translate3d(0px, 0px, 0px) rotate3d(1, 1, 0, 360deg); /* Rotation complète sur le même axe */
+    }
 }
 
-#two {
-    background-color: orange;
-    width: 50px;
-    height: 50px;
-	transform: translateY(50px);
+@keyframes moveAndChangeColor3DFast {
+    0% {	
+        transform: translate3d(0px, 0px, 0px) rotate3d(1, 1, 0, 0deg);
+    }
+    50% {
+        transform: translate3d(50px, 200px, -580px) rotate3d(1, 1, 0, 180deg);
+    }
+    100% {
+        transform: translate3d(0px, 0px, 0px) rotate3d(1, 1, 0, 360deg);
+    }
 }
 
-#three {
-    background-color: yellow;
-    width: 50px;
-    height: 50px;
-	transform: translateY(100px);
+#cont {
+	position: absolute;
+	top: 25vh;
+	left: 25%;
+	width: 50%;
+	height: calc(50vh - 2px);
+	perspective: 800px;	
+	/* background-color: violet; */
 }
 
-#four {
-    background-color: green;
-    width: 50px;
-    height: 50px;
-	transform: translate(50px, 100px);
-}
-
-#five {
-    background-color: blue;
-    width: 50px;
-    height: 50px;
-	transform: translate(100px, 100px);
-}
-
-#six {
-    background-color: indigo;
-    width: 50px;
-    height: 50px;
-	transform: translate(100px, 150px);
-}
-
-#seven {
-    background-color: violet;
-    width: 50px;
-    height: 50px;
-	transform: translate(100px, 200px);
-}
-
-#height {
-    background-color: pink;
-    width: 50px;
-    height: 50px;
-	transform: translate(200px, 0px);
-}
-
-#nine {
-    background-color: lightblue;
-    width: 50px;
-    height: 50px;
-	transform: translate(250px, 0px);
-}
-
-#ten {
-    background-color: lightgreen;
-    width: 50px;
-    height: 50px;
-	transform: translate(300px, 0px);
-}
-
-#eleven {
-    background-color: coral;
-    width: 50px;
-    height: 50px;
-	transform: translate(300px, 50px);
-}
-
-#twelve {
-    background-color: brown;
-    width: 50px;
-    height: 50px;
-	transform: translate(300px, 100px);
-}
-
-#thirteen {
-    background-color: lightgrey;
-    width: 50px;
-    height: 50px;
-	transform: translate(250px, 100px);
-}
-
-#fourteen {
-    background-color: teal;
-    width: 50px;
-    height: 50px;
-	transform: translate(200px, 100px);
-} 
-
-#fifteen {
-    background-color: gold;
-    width: 50px;
-    height: 50px;
-	transform: translate(200px, 150px);
-} 
-
-#sixteen {
-    background-color: silver;
-    width: 50px;
-    height: 50px;
-	transform: translate(200px, 200px);
-}
-
-#seventeen {
-    background-color: navy;
-    width: 50px;
-    height: 50px;
-	transform: translate(250px, 200px);
-} 
-
-#eighteen {
-    background-color: olive;
-    width: 50px;
-    height: 50px;
-	transform: translate(300px, 200px);
+#cont2 {
+	position: absolute;
+	top: 50vh;
+	left: 50%;
+	width: 50%;
+	height: calc(50vh - 2px);
+	perspective: 800px;	
+	/* background-color: violet; */
 }
 
 .square {
 	position: absolute;
-	top: 250px;
-	left: 500px;	
+	top: 0px;
+	left: 0px;
+	width: 10%;
+    height: 10%;
 }
 
-.square:hover {
-	animation: moveAndChangeColor3D 3s infinite ease-in-out;
+#one {
+    background-color: red;
+
+    /* width: 10%;
+    height: 10%; */
 }
+
+#two {
+    background-color: orange;	
+	top: 10%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translateY(50px); */
+}
+
+#three {
+    background-color: yellow;
+	top: 20%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translateY(100px); */
+}
+
+#four {
+    background-color: green;
+	top: 20%;
+	left: 10%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(50px, 100px); */
+}
+
+#five {
+    background-color: blue;
+	top: 20%;
+	left: 20%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(100px, 100px); */
+}
+
+#six {
+    background-color: indigo;
+	top: 30%;
+	left: 20%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(100px, 150px); */
+}
+
+#seven {
+    background-color: rgb(156, 9, 156);
+	top: 40%;
+	left: 20%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(100px, 200px); */
+}
+
+#eight {
+    background-color: pink;
+	left: 40%;	
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(200px, 0px); */
+}
+
+#nine {
+    background-color: lightblue;
+	left: 50%;	
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(250px, 0px); */
+}
+
+#ten {
+    background-color: lightgreen;
+	left: 60%;	
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(300px, 0px); */
+}
+
+#eleven {
+    background-color: coral;
+	top: 10%;
+	left: 60%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(300px, 50px); */
+}
+
+#twelve {
+    background-color: brown;
+	top: 20%;
+	left: 60%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(300px, 100px); */
+}
+
+#thirteen {
+    background-color: lightgrey;
+	top: 20%;
+	left: 50%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(250px, 100px); */
+}
+
+#fourteen {
+    background-color: teal;
+	top: 20%;
+	left: 40%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(200px, 100px); */
+} 
+
+#fifteen {
+    background-color: gold;
+	top: 30%;
+	left: 40%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(200px, 150px); */
+} 
+
+#sixteen {
+    background-color: silver;
+	top: 40%;
+	left: 40%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(200px, 200px); */
+}
+
+#seventeen {
+    background-color: navy;
+	top: 40%;
+	left: 50%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(250px, 200px); */
+} 
+
+#eighteen {
+    background-color: olive;
+	top: 40%;
+	left: 60%;
+    /* width: 50px;
+    height: 50px; */
+	/* transform: translate(300px, 200px); */
+}
+
+/* #cont:hover #one, 
+#cont:hover #three, 
+#cont:hover #five, 
+#cont:hover #seven, 
+#cont:hover #nine, 
+#cont:hover #eleven, 
+#cont:hover #thirteen, 
+#cont:hover #fifteen, 
+#cont:hover #seventeen {
+    animation: moveAndChangeColor3D 3s infinite ease-in-out;
+}
+
+#cont:hover #two, 
+#cont:hover #four, 
+#cont:hover #six, 
+#cont:hover #eight, 
+#cont:hover #ten, 
+#cont:hover #twelve, 
+#cont:hover #fourteen, 
+#cont:hover #sixteen, 
+#cont:hover #eighteen {
+    animation: moveAndChangeColor3DFast 1s infinite ease-in-out;
+} */
+
+#super_cont:hover .square {
+	animation: moveAndChangeColor3DFast 3s infinite ease-in-out;
+}
+/* #cont2:hover .square {
+	animation: moveAndChangeColor3DFast 3s infinite ease-in-out;
+} */
+
+.square
