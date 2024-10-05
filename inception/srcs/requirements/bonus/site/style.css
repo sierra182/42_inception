@@ -55,6 +55,38 @@ button:hover {
     }
 }
 
+@keyframes moveAndChangeColor3DFast2 {
+    0% {	
+        transform: translate3d(0px, 0px, 0px) rotate3d(1, 0, 0, 90deg);
+    }
+    50% {
+        transform: translate3d(50px, 200px, -580px) rotate3d(1, 1, 0, 180deg);
+    }
+    100% {
+        transform: translate3d(0px, 0px, 0px) rotateX(90deg) rotate3d(1, 1, 0, 360deg);
+    }
+}
+
+@keyframes moveAndChangeColor3DFast3 {
+    0% {	
+        transform: translateZ(-100%)  rotate3d(1, 0, 0, 0deg);
+    }
+    50% {
+        transform: translateZ(-500%) rotate3d(1, 1, 0, 180deg);
+    }
+    100% {
+        transform: translateZ(-100%)  rotateX(90deg) rotate3d(1, 1, 0, 360deg);
+    }
+}
+
+#super_cont {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 #cont {
 	position: absolute;
 	top: 25vh;
@@ -67,8 +99,28 @@ button:hover {
 
 #cont2 {
 	position: absolute;
-	top: 50vh;
-	left: 50%;
+	top: 25vh;
+	left: 25%;
+	width: 50%;
+	height: calc(50vh - 2px);
+	perspective: 800px;	
+	/* background-color: violet; */
+}
+
+#cont {
+	position: absolute;
+	top: 25vh;
+	left: 25%;
+	width: 50%;
+	height: calc(50vh - 2px);
+	perspective: 800px;	
+	/* background-color: violet; */
+}
+
+#cont3 {
+	position: absolute;
+	top: 25vh;
+	left: 25%;
 	width: 50%;
 	height: calc(50vh - 2px);
 	perspective: 800px;	
@@ -81,6 +133,7 @@ button:hover {
 	left: 0px;
 	width: 10%;
     height: 10%;
+	transform-origin: -00px -00px;
 }
 
 #one {
@@ -262,11 +315,29 @@ button:hover {
     animation: moveAndChangeColor3DFast 1s infinite ease-in-out;
 } */
 
-#super_cont:hover .square {
+.square2 {
+	/* transform-origin: -500px -100px; */
+	transform: rotateX(90deg)
+}
+
+.square3 {
+
+	transform: translateZ(-100%);
+}
+
+#super_cont:hover .square1 {
 	animation: moveAndChangeColor3DFast 3s infinite ease-in-out;
 }
+
+#super_cont:hover .square2 {
+	animation: moveAndChangeColor3DFast2 3s infinite ease-in-out;
+}
+
+#super_cont:hover .square3 {
+	animation: moveAndChangeColor3DFast3 3s infinite ease-in-out;
+}
+
 /* #cont2:hover .square {
 	animation: moveAndChangeColor3DFast 3s infinite ease-in-out;
 } */
 
-.square
